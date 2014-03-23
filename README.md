@@ -4,7 +4,7 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 
 # Usage
 
-Request-retry is a drop-in replacement for Request, it just adds two new options `maxAttempts` and `retryDelay`.
+Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`.
 
 ```javascript
 var request = require('requestretry');
