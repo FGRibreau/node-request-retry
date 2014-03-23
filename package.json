@@ -1,0 +1,19 @@
+{
+  "name": "retriablerequest",
+  "description": "Retriable Request",
+  "author": {
+    "name": "Francois-Guillaume Ribreau",
+    "email": "npm@fgribreau.com",
+    "url": "http://fgribreau.com"
+  },
+  "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/FGRibreau/node-retriablerequest"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fg-lodash": "0.0.1",
+    "request": "~2.34.0"
+  }
+}
