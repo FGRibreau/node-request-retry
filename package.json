@@ -1,6 +1,6 @@
 {
-  "name": "retriablerequest",
-  "description": "Retriable Request",
+  "name": "requestretry",
+  "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
@@ -8,7 +8,7 @@
   },
   "version": "0.0.1",
   "repository": {
-    "url": "https://github.com/FGRibreau/node-retriablerequest"
+    "url": "https://github.com/FGRibreau/node-request-retry"
   },
   "main": "index.js",
   "license": "MIT",

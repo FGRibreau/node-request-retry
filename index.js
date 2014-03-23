@@ -18,6 +18,7 @@ var DEFAULTS         = {
 };
 
 function isRetriableRequest(err, response){
+  // Inspired from https://github.com/geoffreak/request-enhanced/blob/master/src/request-enhanced.coffee#L107
   return (err && _.contains(RETRIABLE_ERRORS, err.code)) || (response && 500 <= response.statusCode && response.statusCode < 600);
 }
 
@@ -25,7 +26,7 @@ function tryUntilFail(options, f, retryOptions){
   retryOptions.maxAttempts--;
 
   request(options, function(err, response, body){
-    if(isRetriableRequest(err, response)){
+    if(isRetriableRequest(err, response) && retryOptions.maxAttempts >= 0){
       return setTimeout(tryUntilFail.bind(null, options, f, retryOptions), retryOptions.retryDelay);
     }
 
