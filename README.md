@@ -1,4 +1,4 @@
-# Request-retry [![Deps](https://david-dm.org/FGRibreau/request-retry.png)](https://david-dm.org/FGRibreau/request-retry)
+# Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry)
 
 When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
 
