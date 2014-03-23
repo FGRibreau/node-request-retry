@@ -4,7 +4,7 @@
 
 When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
 
-# Usage
+## Usage
 
 Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`.
 
@@ -28,6 +28,12 @@ request({
 Install with [npm](https://npmjs.org/package/requestretry).
 
     npm install --save requestretry
+
+## Todos
+
+- Tests
+- Use an EventEmitter to notify retries
+- Allow the end-user to specify its own conditions to trigger a retry
 
 ## Changelog
 
