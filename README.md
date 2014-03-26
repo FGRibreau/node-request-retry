@@ -19,7 +19,7 @@ request({
   maxAttempts: 5,   // (default) try 5 times
   retryDelay: 5000  // (default) wait for 5s before trying again
 }, function(err, response, body){
-  // this callback will only be called when the request succeeded or after maxAttempts.
+  // this callback will only be called when the request succeeded or after maxAttempts or on error
 });
 ```
 
@@ -37,6 +37,7 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 ## Changelog
 
-v1.0.0: Initial commit
+v1.0.0: request now yield an Request instance with a `.abort()` method.
+v0.0.1: Initial commit
 
 Copyright 2014, [Francois-Guillaume Ribreau](http://fgribreau.com) (npm@fgribreau.com)

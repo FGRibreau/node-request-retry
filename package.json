@@ -6,7 +6,7 @@
     "email": "npm@fgribreau.com",
     "url": "http://fgribreau.com"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "url": "https://github.com/FGRibreau/node-request-retry"
   },
@@ -15,5 +15,9 @@
   "dependencies": {
     "fg-lodash": "0.0.1",
     "request": "~2.34.0"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2"
   }
 }

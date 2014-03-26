@@ -1,14 +1,15 @@
 'use strict';
 
 /*
- * retriablerequest
+ * Request
  *
  * Copyright(c) 2014 Francois-Guillaume Ribreau <npm@fgribreau.com>
  * MIT Licensed
  *
  */
-var request          = require('request');
-var _                = require('fg-lodash');
+var request    = require('request');
+var _          = require('fg-lodash');
+var Cancelable = require('cancelable');
 
 var RETRIABLE_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED'];
 
@@ -17,26 +18,50 @@ var DEFAULTS         = {
   retryDelay: 5000, // wait for 5s before trying again
 };
 
-function isRetriableRequest(err, response){
-  // Inspired from https://github.com/geoffreak/request-enhanced/blob/master/src/request-enhanced.coffee#L107
-  return (err && _.contains(RETRIABLE_ERRORS, err.code)) || (response && 500 <= response.statusCode && response.statusCode < 600);
+function Request(options, f, maxAttempts, retryDelay){
+  this.maxAttempts = maxAttempts;
+  this.retryDelay  = retryDelay;
+  this.options     = options;
+  this.f           = _.once(f);
+  this._timeout    = null;
+  this._req        = null;
 }
 
-function tryUntilFail(options, f, retryOptions){
-  retryOptions.maxAttempts--;
+Request.request = request;
 
-  request(options, function(err, response, body){
-    if(isRetriableRequest(err, response) && retryOptions.maxAttempts >= 0){
-      return setTimeout(tryUntilFail.bind(null, options, f, retryOptions), retryOptions.retryDelay);
+Request.prototype._tryUntilFail = function(){
+  this.maxAttempts--;
+
+  this._req = Request.request(this.options, function(err, response, body){
+    if(this._isRetriable(err, response) && this.maxAttempts >= 0){
+      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
+      return;
     }
 
-    return f(err, response, body);
-  });
+    return this.f(err, response, body);
+  }.bind(this));
+};
+
+Request.prototype._isRetriable = function(err, response){
+  // Inspired from https://github.com/geoffreak/request-enhanced/blob/master/src/request-enhanced.coffee#L107
+  return (err && _.contains(RETRIABLE_ERRORS, err.code)) || (response && 500 <= response.statusCode && response.statusCode < 600);
+};
+
+Request.prototype.abort = function(){
+  if(this._req){
+    this._req.abort();
+  }
+  clearTimeout(this._timeout);
+  this.f(new Error('Aborted'));
+};
+
+function Factory(options, f){
+  var retry = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
+  var req = new Request(options, f, retry.maxAttempts, retry.retryDelay);
+  req._tryUntilFail();
+  return req;
 }
 
-function RetriableRequest(options, f){
-  var retryOptions = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
-  tryUntilFail(options, f, retryOptions);
-}
+module.exports = Factory;
 
-module.exports = RetriableRequest;
+Factory.Request = Request;
