@@ -37,6 +37,15 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 ## Changelog
 
+v1.0.2
+
+    - upgraded `request` to 2.44.0 (19/09/2014)
+    - callback is now optional
+
+v1.0.1: 
+
+    - added `cancelable` as deps
+
 v1.0.0: request now yield an Request instance with a `.abort()` method.
 v0.0.1: Initial commit
 

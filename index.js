@@ -56,6 +56,7 @@ Request.prototype.abort = function(){
 };
 
 function Factory(options, f){
+  f = _.isFunction(f) ? f : _.noop;
   var retry = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
   var req = new Request(options, f, retry.maxAttempts, retry.retryDelay);
   req._tryUntilFail();
