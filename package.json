@@ -6,7 +6,7 @@
     "email": "npm@fgribreau.com",
     "url": "http://fgribreau.com"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "url": "https://github.com/FGRibreau/node-request-retry"
   },
