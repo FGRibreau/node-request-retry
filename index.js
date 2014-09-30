@@ -11,7 +11,7 @@ var request    = require('request');
 var _          = require('fg-lodash');
 var Cancelable = require('cancelable');
 
-var RETRIABLE_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED', 'EHOSTUNREACH'];
+var RETRIABLE_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED', 'EHOSTUNREACH', 'EPIPE'];
 
 var DEFAULTS         = {
   maxAttempts: 5,   // try 5 times

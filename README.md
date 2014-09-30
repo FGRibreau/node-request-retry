@@ -2,7 +2,7 @@
 
 [![npm](https://nodei.co/npm/requestretry.png)](https://npmjs.org/package/requestretry)
 
-When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED`, `EHOSTUNREACH` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
+When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED`, `EHOSTUNREACH`, `EPIPE` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
 
 ## Usage
 
@@ -36,6 +36,10 @@ Install with [npm](https://npmjs.org/package/requestretry).
 - Allow the end-user to specify its own conditions to trigger a retry
 
 ## Changelog
+
+v1.0.4
+
+    - added `EPIPE`
 
 v1.0.3
 
