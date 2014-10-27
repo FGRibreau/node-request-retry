@@ -14,8 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "cancelable": "~0.1.0",
-    "fg-lodash": "0.0.1",
-    "request": "~2.44.0"
+    "fg-lodash": "0.0.2",
+    "request": "~2.47.0"
   },
   "devDependencies": {
     "chai": "~1.9.1",
