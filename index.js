@@ -25,13 +25,6 @@ function Request(options, f, maxAttempts, retryDelay) {
   this.f = _.once(f);
   this._timeout = null;
   this._req = null;
-
-  // expose _req methods from Request
-  ['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe'].forEach(function (methodName) {
-    Request.prototype[methodName] = function () {
-      this.exposeReqFunction(methodName, Array.prototype.slice.call(arguments, 0));
-    }.bind(this);
-  }.bind(this));
 }
 
 Request.request = request;
@@ -62,11 +55,16 @@ Request.prototype.abort = function () {
   this.f(new Error('Aborted'));
 };
 
-Request.prototype.exposeReqFunction = function (name) {
-  if (this._req) {
-    this._req[name].apply(this._req, Array.prototype.slice.call(arguments, 1)[0]);
-  }
-};
+// expose request methods from RequestRetry
+['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe'].forEach(function (methodName) {
+  Request.prototype[methodName] = makeGateway(methodName);
+});
+
+function makeGateway(methodName) {
+  return function () {
+    return this._req[methodName].apply(this._req, Array.prototype.slice.call(arguments));
+  };
+}
 
 function Factory(options, f) {
   f = _.isFunction(f) ? f : _.noop;
