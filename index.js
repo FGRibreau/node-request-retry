@@ -7,33 +7,40 @@
  * MIT Licensed
  *
  */
-var request    = require('request');
-var _          = require('fg-lodash');
+var request = require('request');
+var _ = require('fg-lodash');
 var Cancelable = require('cancelable');
 
 var RETRIABLE_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED', 'EHOSTUNREACH', 'EPIPE'];
 
-var DEFAULTS         = {
-  maxAttempts: 5,   // try 5 times
+var DEFAULTS = {
+  maxAttempts: 5, // try 5 times
   retryDelay: 5000, // wait for 5s before trying again
 };
 
-function Request(options, f, maxAttempts, retryDelay){
+function Request(options, f, maxAttempts, retryDelay) {
   this.maxAttempts = maxAttempts;
-  this.retryDelay  = retryDelay;
-  this.options     = options;
-  this.f           = _.once(f);
-  this._timeout    = null;
-  this._req        = null;
+  this.retryDelay = retryDelay;
+  this.options = options;
+  this.f = _.once(f);
+  this._timeout = null;
+  this._req = null;
+
+  // expose _req methods from Request
+  ['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe'].forEach(function(methodName) {
+    Request.prototype[methodName] = function() {
+      this.exposeReqFunction(methodName, Array.prototype.slice.call(arguments, 0));
+    }.bind(this);
+  }.bind(this));
 }
 
 Request.request = request;
 
-Request.prototype._tryUntilFail = function(){
+Request.prototype._tryUntilFail = function() {
   this.maxAttempts--;
 
-  this._req = Request.request(this.options, function(err, response, body){
-    if(this._isRetriable(err, response) && this.maxAttempts >= 0){
+  this._req = Request.request(this.options, function(err, response, body) {
+    if (this._isRetriable(err, response) && this.maxAttempts >= 0) {
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
       return;
     }
@@ -42,20 +49,26 @@ Request.prototype._tryUntilFail = function(){
   }.bind(this));
 };
 
-Request.prototype._isRetriable = function(err, response){
+Request.prototype._isRetriable = function(err, response) {
   // Inspired from https://github.com/geoffreak/request-enhanced/blob/master/src/request-enhanced.coffee#L107
   return (err && _.contains(RETRIABLE_ERRORS, err.code)) || (response && 500 <= response.statusCode && response.statusCode < 600);
 };
 
-Request.prototype.abort = function(){
-  if(this._req){
+Request.prototype.abort = function() {
+  if (this._req) {
     this._req.abort();
   }
   clearTimeout(this._timeout);
   this.f(new Error('Aborted'));
 };
 
-function Factory(options, f){
+Request.prototype.exposeReqFunction = function(name) {
+  if (this._req) {
+    this._req[name].apply(this._req, Array.prototype.slice.call(arguments, 1)[0]);
+  }
+};
+
+function Factory(options, f) {
   f = _.isFunction(f) ? f : _.noop;
   var retry = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
   var req = new Request(options, f, retry.maxAttempts, retry.retryDelay);
