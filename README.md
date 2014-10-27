@@ -37,6 +37,10 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 ## Changelog
 
+v1.1.0
+
+    - support for 'end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe' request methods by @juliendangers
+
 v1.0.4
 
     - added `EPIPE`
