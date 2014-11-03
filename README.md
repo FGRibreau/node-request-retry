@@ -30,7 +30,7 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
     npm install --save requestretry
 
-## Define your own retry strategy
+## How to define your own retry strategy
 
 ```
 /**
@@ -52,44 +52,44 @@ request({
 });
 ```
 
-## Todos
+## Todo
 
 - Tests
 - Use an EventEmitter to notify retries
 
 ## Changelog
 
-v1.2.0
+[v1.2.0](#v1.2.0)
 
   - support for user-defined retry strategies
   - added `request.RetryStrategies.HTTPError`, `request.RetryStrategies.NetworkError` and `request.RetryStrategies.HTTPOrNetworkError`
 
-v1.1.0
+[v1.1.0](#v1.1.0)
 
     - support for 'end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe' request methods by @juliendangers
 
-v1.0.4
+[v1.0.4](#v1.0.4)
 
     - added `EPIPE`
 
-v1.0.3
+[v1.0.3](#v1.0.3)
 
     - added `EHOSTUNREACH`
 
-v1.0.2
+[v1.0.2](#v1.0.2)
 
     - upgraded `request` to 2.44.0 (19/09/2014)
     - callback is now optional
 
-v1.0.1: 
+[v1.0.1](#v1.0.1): 
 
     - added `cancelable` as deps
 
-v1.0.0:
+[v1.0.0](#v1.0.0):
 
     - request now yield an Request instance with a `.abort()` method.
 
-v0.0.1 
+[v0.0.1](#v0.0.1) 
 
     - initial commit
 
