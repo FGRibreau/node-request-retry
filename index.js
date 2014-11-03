@@ -9,9 +9,8 @@
  */
 var request = require('request');
 var _ = require('fg-lodash');
-var Cancelable = require('cancelable');
+var RetryStrategies = require('./strategies');
 
-var RETRIABLE_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED', 'EHOSTUNREACH', 'EPIPE'];
 
 var DEFAULTS = {
   maxAttempts: 5, // try 5 times
@@ -21,7 +20,19 @@ var DEFAULTS = {
 function Request(options, f, maxAttempts, retryDelay) {
   this.maxAttempts = maxAttempts;
   this.retryDelay = retryDelay;
+
+  /**
+   * Option object
+   * @type {Object}
+   */
   this.options = options;
+
+  /**
+   * Return true if the request should be retried
+   * @type {Function} (err, response) -> Boolean
+   */
+  this.retryStrategy = _.isFunction(options.retryStrategy) ? options.retryStrategy : RetryStrategies.HTTPOrNetworkError;
+
   this.f = _.once(f);
   this._timeout = null;
   this._req = null;
@@ -33,18 +44,13 @@ Request.prototype._tryUntilFail = function () {
   this.maxAttempts--;
 
   this._req = Request.request(this.options, function (err, response, body) {
-    if (this._isRetriable(err, response) && this.maxAttempts >= 0) {
+    if (this.retryStrategy(err, response) && this.maxAttempts >= 0) {
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
       return;
     }
 
     return this.f(err, response, body);
   }.bind(this));
-};
-
-Request.prototype._isRetriable = function (err, response) {
-  // Inspired from https://github.com/geoffreak/request-enhanced/blob/master/src/request-enhanced.coffee#L107
-  return (err && _.contains(RETRIABLE_ERRORS, err.code)) || (response && 500 <= response.statusCode && response.statusCode < 600);
 };
 
 Request.prototype.abort = function () {
@@ -77,3 +83,4 @@ function Factory(options, f) {
 module.exports = Factory;
 
 Factory.Request = Request;
+Factory.RetryStrategies = RetryStrategies;
