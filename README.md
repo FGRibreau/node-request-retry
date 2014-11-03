@@ -15,7 +15,7 @@ request({
   url: 'https://api.domain.com/v1/a/b'
   json:true,
 
-  // The above parameters are specific to Request-retry:
+  // The above parameters are specific to Request-retry
   maxAttempts: 5,   // (default) try 5 times
   retryDelay: 5000  // (default) wait for 5s before trying again
   retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
@@ -46,8 +46,6 @@ function myRetryStrategy(err, response){
 request({
   url: 'https://api.domain.com/v1/a/b'
   json:true,
-  maxAttempts: 5,
-  retryDelay: 5000
   retryStrategy: myRetryStrategy
 }, function(err, response, body){
   // this callback will only be called when the request succeeded or after maxAttempts or on error
