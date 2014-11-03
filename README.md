@@ -1,4 +1,4 @@
-# Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry)
+# Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](https://drone.io/github.com/FGRibreau/node-request-retry/status.png)](https://drone.io/github.com/FGRibreau/node-request-retry/latest)
 
 [![npm](https://nodei.co/npm/requestretry.png)](https://npmjs.org/package/requestretry)
 
@@ -18,6 +18,7 @@ request({
   // The above parameters are specific to Request-retry:
   maxAttempts: 5,   // (default) try 5 times
   retryDelay: 5000  // (default) wait for 5s before trying again
+  retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
 }, function(err, response, body){
   // this callback will only be called when the request succeeded or after maxAttempts or on error
 });
@@ -29,13 +30,41 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
     npm install --save requestretry
 
+## Define your own retry strategy
+
+```
+/**
+ * @param  {Null | Object} err
+ * @param  {Object} response
+ * @return {Boolean} true if the request should be retried
+ */
+function myRetryStrategy(err, response){
+  // retry the request if we had an error or if the response was a 'Bad Gateway'
+  return err || response.statusCode === 502;
+}
+
+request({
+  url: 'https://api.domain.com/v1/a/b'
+  json:true,
+  maxAttempts: 5,
+  retryDelay: 5000
+  retryStrategy: myRetryStrategy
+}, function(err, response, body){
+  // this callback will only be called when the request succeeded or after maxAttempts or on error
+});
+```
+
 ## Todos
 
 - Tests
 - Use an EventEmitter to notify retries
-- Allow the end-user to specify its own conditions to trigger a retry
 
 ## Changelog
+
+v1.2.0
+
+  - support for user-defined retry strategies
+  - added `request.RetryStrategies.HTTPError`, `request.RetryStrategies.NetworkError` and `request.RetryStrategies.HTTPOrNetworkError`
 
 v1.1.0
 
