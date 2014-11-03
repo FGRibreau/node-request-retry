@@ -17,9 +17,11 @@
     "url": "https://github.com/FGRibreau/node-request-retry"
   },
   "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
   "license": "MIT",
   "dependencies": {
-    "cancelable": "~0.1.0",
     "fg-lodash": "0.0.2",
     "request": "~2.47.0"
   },
