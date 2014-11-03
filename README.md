@@ -59,36 +59,44 @@ request({
 
 ## Changelog
 
+<a name="v1.2.0" />
 [v1.2.0](#v1.2.0)
 
   - support for user-defined retry strategies
   - added `request.RetryStrategies.HTTPError`, `request.RetryStrategies.NetworkError` and `request.RetryStrategies.HTTPOrNetworkError`
 
+<a name="v1.1.0" />
 [v1.1.0](#v1.1.0)
 
     - support for 'end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe' request methods by @juliendangers
 
+<a name="v1.0.4" />
 [v1.0.4](#v1.0.4)
 
     - added `EPIPE`
 
+<a name="v1.0.3" />
 [v1.0.3](#v1.0.3)
 
     - added `EHOSTUNREACH`
 
+<a name="v1.0.2" />
 [v1.0.2](#v1.0.2)
 
     - upgraded `request` to 2.44.0 (19/09/2014)
     - callback is now optional
 
+<a name="v1.0.1" />
 [v1.0.1](#v1.0.1): 
 
     - added `cancelable` as deps
 
+<a name="v1.0.0" />
 [v1.0.0](#v1.0.0):
 
     - request now yield an Request instance with a `.abort()` method.
 
+<a name="v0.0.1" />
 [v0.0.1](#v0.0.1) 
 
     - initial commit
