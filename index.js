@@ -62,7 +62,7 @@ Request.prototype.abort = function () {
 };
 
 // expose request methods from RequestRetry
-['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe'].forEach(function (methodName) {
+['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write'].forEach(function (methodName) {
   Request.prototype[methodName] = makeGateway(methodName);
 });
 
