@@ -59,6 +59,11 @@ request({
 
 ## Changelog
 
+<a name="v1.2.1" />
+[v1.2.1](#v1.2.1)
+
+  - add support for 'write' request method by @juliendangers
+
 <a name="v1.2.0" />
 [v1.2.0](#v1.2.0)
 
