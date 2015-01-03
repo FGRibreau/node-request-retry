@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "fg-lodash": "0.0.2",
-    "request": "~2.47.0"
+    "request": "2.51.x"
   },
   "devDependencies": {
     "chai": "~1.9.1",
