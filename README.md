@@ -59,6 +59,11 @@ request({
 
 ## Changelog
 
+<a name="v1.2.2" />
+[v1.2.2](#v1.2.2)
+
+  - update `request` to 2.51.0
+
 <a name="v1.2.1" />
 [v1.2.1](#v1.2.1)
 
