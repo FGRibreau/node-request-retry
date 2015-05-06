@@ -80,5 +80,5 @@
     "white"         : false,    // true: Check against strict whitespace and indentation rules
 
     // Custom Globals
-    "prefef"        : ["it", "describe"]       // additional predefined global variables
+    "predef"        : ["it", "describe"]       // additional predefined global variables
 }
