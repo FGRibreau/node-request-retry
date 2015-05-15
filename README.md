@@ -52,6 +52,13 @@ request({
 });
 ```
 
+## Modifying `request` options
+You can access request's `defaults` method like so:
+
+```js
+var request = require('requestretry').request.defaults({my: options});
+```
+
 ## Todo
 
 - Tests
