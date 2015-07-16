@@ -1,5 +1,23 @@
 # Change Log
 
+## [v1.4.0](https://github.com/fgribreau/node-request-retry/tree/v1.4.0) (2015-07-16)
+
+[Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.3.1...v1.4.0)
+
+**Closed issues:**
+
+- Setting request options for the request module [\#8](https://github.com/FGRibreau/node-request-retry/issues/8)
+
+**Merged pull requests:**
+
+- add EAI\_AGAIN to the list of retriable network errors [\#13](https://github.com/FGRibreau/node-request-retry/pull/13) ([ejok](https://github.com/ejok))
+
+- Add notes on request module to readme [\#9](https://github.com/FGRibreau/node-request-retry/pull/9) ([alexkahn](https://github.com/alexkahn))
+
+## [v1.3.1](https://github.com/fgribreau/node-request-retry/tree/v1.3.1) (2015-05-06)
+
+[Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.3.0...v1.3.1)
+
 ## [v1.3.0](https://github.com/fgribreau/node-request-retry/tree/v1.3.0) (2015-05-06)
 
 [Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.2.2...v1.3.0)
