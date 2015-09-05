@@ -1,4 +1,4 @@
-# Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](https://drone.io/github.com/FGRibreau/node-request-retry/status.png)](https://drone.io/github.com/FGRibreau/node-request-retry/latest) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)]()
+# Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](https://drone.io/github.com/FGRibreau/node-request-retry/status.png)](https://drone.io/github.com/FGRibreau/node-request-retry/latest) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry)
 
 [![npm](https://nodei.co/npm/requestretry.png)](https://npmjs.org/package/requestretry)
 
