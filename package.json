@@ -1,7 +1,7 @@
 {
   "name": "requestretry",
   "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
@@ -23,10 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "fg-lodash": "0.0.2",
-    "request": "2.58.x"
+    "request": "^2.62.x"
   },
   "devDependencies": {
-    "chai": "~2.3.0",
-    "mocha": "~2.2.4"
+    "chai": "^3.2.0",
+    "mocha": "^2.3.0"
   }
 }
