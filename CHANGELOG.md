@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.4.1](https://github.com/fgribreau/node-request-retry/tree/v1.4.1) (2015-09-21)
+
+[Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.4.0...v1.4.1)
+
+**Merged pull requests:**
+
+- Update dependencies, fixes build status [\#14](https://github.com/FGRibreau/node-request-retry/pull/14) ([fhemberger](https://github.com/fhemberger))
+
 ## [v1.4.0](https://github.com/fgribreau/node-request-retry/tree/v1.4.0) (2015-07-16)
 
 [Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.3.1...v1.4.0)
