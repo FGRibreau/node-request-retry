@@ -20,6 +20,7 @@ var DEFAULTS = {
 function Request(options, f, maxAttempts, retryDelay) {
   this.maxAttempts = maxAttempts;
   this.retryDelay = retryDelay;
+  this.attempts = 0;
 
   /**
    * Option object
@@ -42,9 +43,13 @@ Request.request = request;
 
 Request.prototype._tryUntilFail = function () {
   this.maxAttempts--;
+  this.attempts++;
 
   this._req = Request.request(this.options, function (err, response, body) {
-    if (this.retryStrategy(err, response) && this.maxAttempts >= 0) {
+    if (response) {
+      response.attempts = this.attempts;
+    }
+    if (this.retryStrategy(err, response) && this.maxAttempts > 0) {
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
       return;
     }
