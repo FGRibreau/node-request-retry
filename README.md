@@ -6,7 +6,7 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 
 ## Usage
 
-Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`.
+Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response, `attempts`.
 
 ```javascript
 var request = require('requestretry');
@@ -21,6 +21,9 @@ request({
   retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
 }, function(err, response, body){
   // this callback will only be called when the request succeeded or after maxAttempts or on error
+  if (response) {
+    console.log('The number of request attempts: ' + response.attempts);
+  }
 });
 ```
 
@@ -62,7 +65,6 @@ var request = require('requestretry').request.defaults({my: options});
 ## Todo
 
 - Tests
-- Use an EventEmitter to notify retries
 
 ## [Changelog](CHANGELOG.md)
 
