@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5.0](https://github.com/fgribreau/node-request-retry/tree/v1.5.0) (2015-09-24)
+
+[Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.4.1...v1.5.0)
+
+**Closed issues:**
+
+- Is there anyway to configure maxAttempts to Infinity \(Try Until available\) [\#17](https://github.com/FGRibreau/node-request-retry/issues/17)
+
+**Merged pull requests:**
+
+- Add attempts property for retry attempt info [\#16](https://github.com/FGRibreau/node-request-retry/pull/16) ([bdeitte](https://github.com/bdeitte))
+
 ## [v1.4.1](https://github.com/fgribreau/node-request-retry/tree/v1.4.1) (2015-09-21)
 
 [Full Changelog](https://github.com/fgribreau/node-request-retry/compare/v1.4.0...v1.4.1)
