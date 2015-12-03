@@ -4,7 +4,7 @@ var request = require('../');
 var t = require('chai').assert;
 var nock = require('nock');
 
-describe.only('Promises support', function () {
+describe('Promises support', function () {
 
   it('should by default resolve with the full response on success', function (done) {
     request({
