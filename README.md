@@ -62,10 +62,6 @@ You can access request's `defaults` method like so:
 var request = require('requestretry').request.defaults({my: options});
 ```
 
-## Todo
-
-- Tests
-
 ## [Changelog](CHANGELOG.md)
 
 Copyright 2014, [Francois-Guillaume Ribreau](http://fgribreau.com) (npm@fgribreau.com)
