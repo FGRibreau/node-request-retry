@@ -17,7 +17,32 @@ var DEFAULTS = {
   maxAttempts: 5, // try 5 times
   retryDelay: 5000, // wait for 5s before trying again
   fullResponse: true, // resolve promise with the full response object
+  promiseFactory: defaultPromiseFactory // Function to use a different promise implementation library
 };
+
+// Default promise factory wich use bluebird
+function defaultPromiseFactory(resolver) {
+  return new Promise(resolver);
+}
+
+/**
+ * It calls the promiseFactory function passing it the resolver for the promise
+ *
+ * @param {Object} requestInstance - The Request Retry instance
+ * @param {Function} promiseFactoryFn - The Request Retry instance
+ * @return {Object} - The promise instance
+ */
+function makePromise(requestInstance, promiseFactoryFn) {
+
+  // Resolver function wich assigns the promise (resolve, reject) functions
+  // to the requestInstance
+  function resolver(resolve, reject) {
+    this._resolve = resolve;
+    this._reject = reject;
+  }
+
+  return promiseFactoryFn(resolver.bind(requestInstance));
+}
 
 function Request(options, f, retryConfig) {
   this.maxAttempts = retryConfig.maxAttempts;
@@ -44,10 +69,7 @@ function Request(options, f, retryConfig) {
 
   // create the promise only when no callback was provided
   if (!this._callback) {
-    this._promise = new Promise(function (resolve, reject) {
-      this._resolve = resolve;
-      this._reject = reject;
-    }.bind(this));
+    this._promise = makePromise(this, retryConfig.promiseFactory);
   }
 
   this.reply = function requestRetryReply(err, response, body) {
@@ -100,7 +122,7 @@ Request.prototype.abort = function () {
 });
 
 // expose promise methods
-['then', 'catch', 'finally'].forEach(function (promiseMethod) {
+['then', 'catch', 'finally', 'fail', 'done'].forEach(function (promiseMethod) {
   Request.prototype[promiseMethod] = function exposedPromiseMethod () {
     if (this._callback) {
       throw new Error('A callback was provided but waiting a promise, use only one pattern');
