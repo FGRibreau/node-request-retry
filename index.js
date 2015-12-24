@@ -20,7 +20,7 @@ var DEFAULTS = {
   promiseFactory: defaultPromiseFactory // Function to use a different promise implementation library
 };
 
-// Default promise factory wich use bluebird
+// Default promise factory which use bluebird
 function defaultPromiseFactory(resolver) {
   return new Promise(resolver);
 }
