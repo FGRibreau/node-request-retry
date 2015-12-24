@@ -85,4 +85,113 @@ describe('Promises support', function () {
     });
   });
 
+  describe('Different libraries support', function () {
+
+    function makeRequest(promiseFactoryFn, done, throwError) {
+      var requestUrl = 'http://www.filltext.com/?rows=1';
+
+      if (throwError) {
+        requestUrl += '&err=500';
+      }
+
+      return request({
+        url: requestUrl,
+        maxAttempts: 1,
+        fullResponse: false, // to resolve with just the response body,
+        promiseFactory: promiseFactoryFn // custom promise factory function
+      })
+      .then(function (body) {
+        if (throwError) {
+          throw body; // To simulate an error in the request
+        }
+
+        t.isString(body);
+        var data = JSON.parse(body);
+        t.isArray(data);
+        t.isObject(data[0]);
+        done();
+      });
+    }
+
+    describe('Using when.js', function () {
+      function customPromiseFactory(resolver) {
+        return require('when').promise(resolver);
+      }
+
+      it('should work on request success', function (done) {
+        makeRequest(customPromiseFactory, done);
+      });
+
+      it('should work on request fail', function (done) {
+        makeRequest(customPromiseFactory, done, true)
+          .catch(function (err) {
+            t.strictEqual(err, 'Internal Server Error');
+            done();
+          });
+      });
+    });
+
+    describe('Using Q', function () {
+      function customPromiseFactory(resolver) {
+        return require('q').Promise(resolver);
+      }
+
+      it('should work on request success', function (done) {
+        makeRequest(customPromiseFactory, done);
+      });
+
+      it('should work on request fail', function (done) {
+        makeRequest(customPromiseFactory, done, true)
+          .catch(function (err) {
+            t.strictEqual(err, 'Internal Server Error');
+            done();
+          });
+      });
+    });
+
+    describe('Using kew', function () {
+      function customPromiseFactory(resolver) {
+        var Promise = require('kew').Promise;
+        var promise = new Promise();
+
+        resolver(promise.resolve.bind(promise), promise.reject.bind(promise));
+
+        return promise;
+      }
+
+      it('should work on request success', function (done) {
+        makeRequest(customPromiseFactory, done);
+      });
+
+      it('should work on request fail', function (done) {
+        makeRequest(customPromiseFactory, done, true)
+          .fail(function (err) {
+            t.strictEqual(err, 'Internal Server Error');
+            done();
+          });
+      });
+    });
+
+    describe('Using RSVP.js', function () {
+      function customPromiseFactory(resolver) {
+        var Promise = require('rsvp').Promise;
+
+        return new Promise(resolver);
+      }
+
+      it('should work on request success', function (done) {
+        makeRequest(customPromiseFactory, done);
+      });
+
+      it('should work on request fail', function (done) {
+        makeRequest(customPromiseFactory, done, true)
+          .catch(function (err) {
+            t.strictEqual(err, 'Internal Server Error');
+            done();
+          });
+      });
+    });
+
+  });
+
 });
