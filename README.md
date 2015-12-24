@@ -1,6 +1,6 @@
 # Request-retry [![Deps](https://david-dm.org/FGRibreau/node-request-retry.png)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](https://drone.io/github.com/FGRibreau/node-request-retry/status.png)](https://drone.io/github.com/FGRibreau/node-request-retry/latest) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry)
 
-[![npm](https://nodei.co/npm/requestretry.png)](https://npmjs.org/package/requestretry)
+![NPM](https://nodei.co/npm/requestretry.png?downloadRank=true) ![NPM](https://nodei.co/npm-dl/requestretry.png?months=3&height=2)
 
 When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED`, `EHOSTUNREACH`, `EPIPE`, `EAI_AGAIN` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
 
@@ -17,7 +17,7 @@ request({
   url: 'https://api.domain.com/v1/a/b'
   json:true,
 
-  // The below parameters are specific to Request-retry
+  // The below parameters are specific to request-retry
   maxAttempts: 5,   // (default) try 5 times
   retryDelay: 5000,  // (default) wait for 5s before trying again
   retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
@@ -118,10 +118,6 @@ You can access request's `defaults` method like so:
 ```js
 var request = require('requestretry').request.defaults({my: options});
 ```
-
-## Todo
-
-- Tests
 
 ## [Changelog](CHANGELOG.md)
 
