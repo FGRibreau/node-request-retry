@@ -36,12 +36,12 @@ function makePromise(requestInstance, promiseFactoryFn) {
 
   // Resolver function wich assigns the promise (resolve, reject) functions
   // to the requestInstance
-  function resolver(resolve, reject) {
+  function Resolver(resolve, reject) {
     this._resolve = resolve;
     this._reject = reject;
   }
 
-  return promiseFactoryFn(resolver.bind(requestInstance));
+  return promiseFactoryFn(Resolver.bind(requestInstance));
 }
 
 function Request(options, f, retryConfig) {
