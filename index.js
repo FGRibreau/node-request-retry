@@ -7,6 +7,7 @@
  * MIT Licensed
  *
  */
+var Promise = require('bluebird');
 var request = require('request');
 var _ = require('fg-lodash');
 var RetryStrategies = require('./strategies');
@@ -15,11 +16,38 @@ var RetryStrategies = require('./strategies');
 var DEFAULTS = {
   maxAttempts: 5, // try 5 times
   retryDelay: 5000, // wait for 5s before trying again
+  fullResponse: true, // resolve promise with the full response object
+  promiseFactory: defaultPromiseFactory // Function to use a different promise implementation library
 };
 
-function Request(options, f, maxAttempts, retryDelay) {
-  this.maxAttempts = maxAttempts;
-  this.retryDelay = retryDelay;
+// Default promise factory which use bluebird
+function defaultPromiseFactory(resolver) {
+  return new Promise(resolver);
+}
+
+/**
+ * It calls the promiseFactory function passing it the resolver for the promise
+ *
+ * @param {Object} requestInstance - The Request Retry instance
+ * @param {Function} promiseFactoryFn - The Request Retry instance
+ * @return {Object} - The promise instance
+ */
+function makePromise(requestInstance, promiseFactoryFn) {
+
+  // Resolver function wich assigns the promise (resolve, reject) functions
+  // to the requestInstance
+  function resolver(resolve, reject) {
+    this._resolve = resolve;
+    this._reject = reject;
+  }
+
+  return promiseFactoryFn(resolver.bind(requestInstance));
+}
+
+function Request(options, f, retryConfig) {
+  this.maxAttempts = retryConfig.maxAttempts;
+  this.retryDelay = retryConfig.retryDelay;
+  this.fullResponse = retryConfig.fullResponse;
   this.attempts = 0;
 
   /**
@@ -34,9 +62,29 @@ function Request(options, f, maxAttempts, retryDelay) {
    */
   this.retryStrategy = _.isFunction(options.retryStrategy) ? options.retryStrategy : RetryStrategies.HTTPOrNetworkError;
 
-  this.f = _.once(f);
   this._timeout = null;
   this._req = null;
+
+  this._callback = _.isFunction(f) ? _.once(f) : null;
+
+  // create the promise only when no callback was provided
+  if (!this._callback) {
+    this._promise = makePromise(this, retryConfig.promiseFactory);
+  }
+
+  this.reply = function requestRetryReply(err, response, body) {
+    if (this._callback) {
+      return this._callback(err, response, body);
+    }
+
+    if (err) {
+      return this._reject(err);
+    }
+
+    // resolve with the full response or just the body
+    response = this.fullResponse ? response : body;
+    this._resolve(response);
+  };
 }
 
 Request.request = request;
@@ -54,7 +102,7 @@ Request.prototype._tryUntilFail = function () {
       return;
     }
 
-    return this.f(err, response, body);
+    this.reply(err, response, body);
   }.bind(this));
 };
 
@@ -63,24 +111,29 @@ Request.prototype.abort = function () {
     this._req.abort();
   }
   clearTimeout(this._timeout);
-  this.f(new Error('Aborted'));
+  this.reply(new Error('Aborted'));
 };
 
 // expose request methods from RequestRetry
-['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write'].forEach(function (methodName) {
-  Request.prototype[methodName] = makeGateway(methodName);
+['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write'].forEach(function (requestMethod) {
+  Request.prototype[requestMethod] = function exposedRequestMethod () {
+    return this._req[requestMethod].apply(this._req, arguments);
+  };
 });
 
-function makeGateway(methodName) {
-  return function () {
-    return this._req[methodName].apply(this._req, Array.prototype.slice.call(arguments));
+// expose promise methods
+['then', 'catch', 'finally', 'fail', 'done'].forEach(function (promiseMethod) {
+  Request.prototype[promiseMethod] = function exposedPromiseMethod () {
+    if (this._callback) {
+      throw new Error('A callback was provided but waiting a promise, use only one pattern');
+    }
+    return this._promise[promiseMethod].apply(this._promise, arguments);
   };
-}
+});
 
 function Factory(options, f) {
-  f = _.isFunction(f) ? f : _.noop;
-  var retry = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
-  var req = new Request(options, f, retry.maxAttempts, retry.retryDelay);
+  var retryConfig = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
+  var req = new Request(options, f, retryConfig);
   req._tryUntilFail();
   return req;
 }

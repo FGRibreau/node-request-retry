@@ -6,7 +6,9 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 
 ## Usage
 
-Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response, `attempts`.
+Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response, `attempts`. It supports callbacks or promises.
+
+### With callbacks
 
 ```javascript
 var request = require('requestretry');
@@ -25,6 +27,61 @@ request({
     console.log('The number of request attempts: ' + response.attempts);
   }
 });
+```
+
+### With promises
+
+When you're using promises, you can pass the two following options:
+- `fullResponse` _(default true)_ - To resolve the promise with the full response or just the body
+- `promiseFactory` _(default bluebird)_ - A function to allow the usage of a different promise implementation library
+
+```javascript
+request({
+  url: 'https://api.domain.com/v1/a/b'
+  json:true,
+
+  fullResponse: true // (default) To resolve the promise with the full response or just the body
+})
+.then(function (response) {
+  // response = The full response object or just the body
+})
+.catch(function(error) {
+  // error = Any occurred error
+})
+```
+
+**Using `promiseFactory` option to use a different promise implementation library**
+
+```javascript
+// See the tests for different libraries usage examples
+
+/**
+ * @param  {Function} resolver The promise resolver function
+ * @return {Object} The promise instance
+ */
+function customPromiseFactory(resolver) {
+  // With when.js
+  return require('when').promise(resolver);
+
+  // With RSVP.js
+  var Promise = require('rsvp').Promise;
+
+  return new Promise(resolver);
+}
+
+request({
+  url: 'https://api.domain.com/v1/a/b'
+  json:true,
+
+  // Custom promise factory function
+  promiseFactory: customPromiseFactory
+})
+.then(function (response) {
+  // response = The full response object or just the body
+})
+.catch(function(error) {
+  // error = Any occurred error
+})
 ```
 
 ## Installation
