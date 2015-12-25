@@ -113,9 +113,10 @@ describe('Promises support', function () {
       });
     }
 
-    describe('Using when.js', function () {
+    describe('Using bluebird', function () {
+      var Promise = require('bluebird');
       function customPromiseFactory(resolver) {
-        return require('when').promise(resolver);
+        return new Promise(resolver);
       }
 
       it('should work on request success', function (done) {

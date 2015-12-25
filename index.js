@@ -7,7 +7,7 @@
  * MIT Licensed
  *
  */
-var Promise = require('bluebird');
+var when = require('when');
 var request = require('request');
 var _ = require('fg-lodash');
 var RetryStrategies = require('./strategies');
@@ -22,7 +22,7 @@ var DEFAULTS = {
 
 // Default promise factory which use bluebird
 function defaultPromiseFactory(resolver) {
-  return new Promise(resolver);
+  return when.promise(resolver);
 }
 
 /**

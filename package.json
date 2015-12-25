@@ -22,9 +22,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "~3.0.5",
     "fg-lodash": "0.0.2",
-    "request": "^2.62.x"
+    "request": "^2.62.x",
+    "when": "~3.7.5"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -33,6 +33,6 @@
     "nock": "~3.1.0",
     "q": "~1.4.1",
     "rsvp": "~3.1.0",
-    "when": "~3.7.5"
+    "bluebird": "~3.0.5"
   }
 }
