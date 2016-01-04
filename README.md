@@ -34,7 +34,7 @@ request({
 
 When you're using promises, you can pass the two following options:
 - `fullResponse` _(default true)_ - To resolve the promise with the full response or just the body
-- `promiseFactory` _(default bluebird)_ - A function to allow the usage of a different promise implementation library
+- `promiseFactory` _(default whenjs)_ - A function to allow the usage of a different promise implementation library
 
 ```javascript
 request({
