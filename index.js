@@ -11,13 +11,16 @@ var when = require('when');
 var request = require('request');
 var _ = require('fg-lodash');
 var RetryStrategies = require('./strategies');
+var Calculators = require('./calculators'); 
 
 
 var DEFAULTS = {
   maxAttempts: 5, // try 5 times
   retryDelay: 5000, // wait for 5s before trying again
   fullResponse: true, // resolve promise with the full response object
-  promiseFactory: defaultPromiseFactory // Function to use a different promise implementation library
+  promiseFactory: defaultPromiseFactory, // Function to use a different promise implementation library
+  retryIncrement: 0, // if retryIncrement is specified the delay will be retryDelay + (retryIncrement*attemptIndex-1)
+  retryMaxDelay: 0 // if retryMaxDelay is > 0, the delay between attempts will be capped at retryMaxDelay 
 };
 
 // Default promise factory which use bluebird
@@ -48,6 +51,8 @@ function Request(options, f, retryConfig) {
   this.maxAttempts = retryConfig.maxAttempts;
   this.retryDelay = retryConfig.retryDelay;
   this.fullResponse = retryConfig.fullResponse;
+  this.retryIncrement = retryConfig.retryIncrement;
+  this.retryMaxDelay = retryConfig.retryMaxDelay;
   this.attempts = 0;
 
   /**
@@ -98,7 +103,8 @@ Request.prototype._tryUntilFail = function () {
       response.attempts = this.attempts;
     }
     if (this.retryStrategy(err, response) && this.maxAttempts > 0) {
-      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
+      this._timeout = setTimeout(this._tryUntilFail.bind(this), 
+        Calculators.IncrementTimesAttemptDelayCalculator(this.retryDelay, this.retryIncrement, this.attempts, this.retryMaxDelay));
       return;
     }
 
@@ -142,3 +148,4 @@ module.exports = Factory;
 
 Factory.Request = Request;
 Factory.RetryStrategies = RetryStrategies;
+Factory.Calculators = Calculators;
