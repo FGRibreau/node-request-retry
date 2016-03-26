@@ -122,4 +122,8 @@ var request = require('requestretry').request.defaults({my: options});
 
 ## [Changelog](CHANGELOG.md)
 
+## Donate
+
+I maintain this project in my free time, if it helped you please support my work [via paypal](https://paypal.me/fgribreau) or [Bitcoins](https://www.coinbase.com/fgribreau), thanks a lot!
+
 Copyright 2014, [Francois-Guillaume Ribreau](http://fgribreau.com) (npm@fgribreau.com)
