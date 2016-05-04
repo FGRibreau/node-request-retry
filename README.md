@@ -114,10 +114,11 @@ request({
 ```
 
 ## Modifying `request` options
-You can access request's `defaults` method like so:
+
+You can use the `defaults` method to provide default options like so:
 
 ```js
-var request = require('requestretry').request.defaults({my: options});
+var request = require('requestretry').defaults({ json: true, retryStrategy: myRetryStrategy });
 ```
 
 ## [Changelog](CHANGELOG.md)

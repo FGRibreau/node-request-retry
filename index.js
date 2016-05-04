@@ -138,7 +138,23 @@ function Factory(options, f) {
   return req;
 }
 
+function defaults(defaultOptions, defaultF) {
+  var factory = function (options, f) {
+    if (typeof options === "string") {
+        options = { url: options };
+    }
+    return Factory.apply(null, [ _.defaults({}, options, defaultOptions), f || defaultF ]);
+  };
+  factory.defaults = function (newDefaultOptions, newDefaultF) {
+    return defaults.apply(null, [ _.defaults({}, newDefaultOptions, defaultOptions), newDefaultF || defaultF ]);
+  };
+  factory.Request = Request;
+  factory.RetryStrategies = RetryStrategies;
+  return factory;
+}
+
 module.exports = Factory;
 
+Factory.defaults = defaults;
 Factory.Request = Request;
 Factory.RetryStrategies = RetryStrategies;
