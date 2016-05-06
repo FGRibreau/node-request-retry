@@ -18,7 +18,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "changelog": "github-changes --o $(node -p 'process.env.npm_package_repository_url.split(\"/\")[3];') --r $(node -p 'a=process.env.npm_package_repository_url.split(\"/\");a[a.length-1].split(\".\")[0]') --token $CHANGELOG_GITHUB_TOKEN_FG -f CHANGELOG.md",
+    "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,12 +29,13 @@
     "when": "~3.7.5"
   },
   "devDependencies": {
+    "bluebird": "~3.0.5",
     "chai": "^3.2.0",
+    "github-changes": "^1.0.2",
     "kew": "~0.7.0",
     "mocha": "^2.3.0",
     "nock": "~3.1.0",
     "q": "~1.4.1",
-    "rsvp": "~3.1.0",
-    "bluebird": "~3.0.5"
+    "rsvp": "~3.1.0"
   }
 }
