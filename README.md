@@ -91,6 +91,13 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
     npm install --save requestretry
 
+## How to use an incremental retry pattern
+ - If a retryIncrement and retryMaxDelay options are specified, the delay between attempts will be:
+```
+retryDelay + (retryIncrement * (attemptIndex - 1))
+```
+ - If retryMaxDelay is > 0, the delay between attempts will be capped at retryMaxDelay 
+
 ## How to define your own retry strategy
 
 ```
