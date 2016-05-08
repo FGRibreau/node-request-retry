@@ -121,6 +121,18 @@ You can use the `defaults` method to provide default options like so:
 var request = require('requestretry').defaults({ json: true, retryStrategy: myRetryStrategy });
 ```
 
+## Convenience methods
+
+As with `request`, several helpers are provided for various HTTP methods:
+
+* `request.get(url)` - same as `request(options, callback)` or `request(options)`.
+* `request.head(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `HEAD`.
+* `request.post(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `POST`.
+* `request.put(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `PUT`.
+* `request.patch(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `PATCH`.
+* `request.del(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `DELETE`.
+* `request.delete(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `DELETE`.
+
 ## [Changelog](CHANGELOG.md)
 
 ## Donate

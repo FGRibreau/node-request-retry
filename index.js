@@ -138,18 +138,41 @@ function Factory(options, f) {
   return req;
 }
 
+// adds a helper for HTTP method `verb` to object `obj`
+function makeHelper(obj, verb) {
+  obj[verb] = function helper(options, f) {
+    if (typeof options === 'object') {
+      options.method = verb.toUpperCase();
+    } else if (typeof options === 'string') {
+      options = {
+          method: verb.toUpperCase(),
+          uri: options
+      };
+    }
+    return obj(options, f);
+  };
+}
+
 function defaults(defaultOptions, defaultF) {
   var factory = function (options, f) {
     if (typeof options === "string") {
-        options = { url: options };
+      options = { uri: options };
     }
     return Factory.apply(null, [ _.defaults({}, options, defaultOptions), f || defaultF ]);
   };
+
   factory.defaults = function (newDefaultOptions, newDefaultF) {
     return defaults.apply(null, [ _.defaults({}, newDefaultOptions, defaultOptions), newDefaultF || defaultF ]);
   };
+
   factory.Request = Request;
   factory.RetryStrategies = RetryStrategies;
+
+  ['get', 'head', 'post', 'put', 'patch', 'delete'].forEach(function (verb) {
+    makeHelper(factory, verb);
+  });
+  factory.del = factory['delete'];
+
   return factory;
 }
 
@@ -158,3 +181,9 @@ module.exports = Factory;
 Factory.defaults = defaults;
 Factory.Request = Request;
 Factory.RetryStrategies = RetryStrategies;
+
+// define .get/.post/... helpers
+['get', 'head', 'post', 'put', 'patch', 'delete'].forEach(function (verb) {
+  makeHelper(Factory, verb);
+});
+Factory.del = Factory['delete'];

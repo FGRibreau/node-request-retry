@@ -30,7 +30,7 @@ describe('Defaults', function () {
         json: true,
         qs: { d: "foo" }
     });
-    r({ url: 'http://www.filltext.com/?rows=1', qs: { d: "{index}" } }, function (err, response, body) {
+    r.get({ url: 'http://www.filltext.com/?rows=1', qs: { d: "{index}" } }, function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
       t.strictEqual(body[0].d, 1);
       done();
@@ -45,9 +45,10 @@ describe('Defaults', function () {
         json: true
     });
     var level2 = level1.defaults({
-        qs: { d: "{index}" }
+        qs: { d: "{index}" },
+        fullResponse: false
     });
-    level2({ uri: '/?rows=1', fullResponse: false }).then(function (body) {
+    level2.get('/?rows=1').then(function (body) {
       t.strictEqual(body[0].d, 1);
       done();
     });
