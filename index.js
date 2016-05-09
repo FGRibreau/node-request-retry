@@ -7,6 +7,7 @@
  * MIT Licensed
  *
  */
+var extend = require('extend');
 var when = require('when');
 var request = require('request');
 var _ = require('fg-lodash');
@@ -143,10 +144,10 @@ function defaults(defaultOptions, defaultF) {
     if (typeof options === "string") {
         options = { url: options };
     }
-    return Factory.apply(null, [ _.defaults({}, options, defaultOptions), f || defaultF ]);
+    return Factory.apply(null, [ extend(true, {}, defaultOptions, options), f || defaultF ]);
   };
   factory.defaults = function (newDefaultOptions, newDefaultF) {
-    return defaults.apply(null, [ _.defaults({}, newDefaultOptions, defaultOptions), newDefaultF || defaultF ]);
+    return defaults.apply(null, [ extend(true, {}, defaultOptions, newDefaultOptions), newDefaultF || defaultF ]);
   };
   factory.Request = Request;
   factory.RetryStrategies = RetryStrategies;

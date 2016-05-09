@@ -53,4 +53,17 @@ describe('Defaults', function () {
     });
   });
 
+  it('should perform "deep" defaulting', function (done) {
+    var r = request.defaults({
+        json: true,
+        qs: { d: "{index}" }
+    });
+    r({ url: 'http://www.filltext.com/?rows=1', qs: { x: "test" } }, function (err, response, body) {
+      t.strictEqual(response.statusCode, 200);
+      t.strictEqual(body[0].d, 1);
+      t.strictEqual(body[0].x, "test");
+      done();
+    });
+  });
+
 });
