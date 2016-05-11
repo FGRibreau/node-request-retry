@@ -1,9 +1,15 @@
 ## Change Log
 
+### v1.8.0 (2016/05/11 06:25 +00:00)
+- [6767b49](https://github.com/FGRibreau/node-request-retry/commit/6767b497ad0f015bbc87eff65a5f6abd6d9e481e) Release v1.8.0. (@FGRibreau)
+- [#32](https://github.com/FGRibreau/node-request-retry/pull/32) Merge pull request #32 from tcort/helpers (@tcort)
+- [97d6429](https://github.com/FGRibreau/node-request-retry/commit/97d6429ac962573cfa0adc4a3174f127301298c0) docs(changelog): updated (@FGRibreau)
+
 ### v1.7.1 (2016/05/11 06:24 +00:00)
 - [55ab78a](https://github.com/FGRibreau/node-request-retry/commit/55ab78a92b63309a142f01cd6cb6eac1e3693f7f) Release v1.7.1. (@FGRibreau)
 - [#33](https://github.com/FGRibreau/node-request-retry/pull/33) Merge pull request #33 from tcort/defaultsDeep (@tcort)
 - [b514a81](https://github.com/FGRibreau/node-request-retry/commit/b514a8161ece2d053ded9c52a6ba0a2fad65d6a2) defaults(): use extend for "deep" defaulting (@tcort)
+- [0cb9e61](https://github.com/FGRibreau/node-request-retry/commit/0cb9e6112d9ce3c0486d6c6fb17d3a3fd878d086) Add support for .get/.post/... helpers (@tcort)
 - [9e29831](https://github.com/FGRibreau/node-request-retry/commit/9e298310f88cd095f28b0b418565551f7c574b8c) docs(changelog): updated (@FGRibreau)
 - [777ca04](https://github.com/FGRibreau/node-request-retry/commit/777ca04cca94b3bc277a59dd53f572179bddead1) fix(changelog): migrated changelog from ruby to js (@FGRibreau)
 
