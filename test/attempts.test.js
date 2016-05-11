@@ -5,9 +5,7 @@ var t = require('chai').assert;
 
 describe('Request attempts', function () {
   it('should show 1 attempt after a successful call', function (done) {
-    request({
-      url: 'http://www.filltext.com/?rows=1', // return 1 row of data
-    }, function (err, response, body) {
+    request.get('http://www.filltext.com/?rows=1', function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
       t.strictEqual(response.attempts, 1);
       done();

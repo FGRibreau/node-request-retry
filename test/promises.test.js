@@ -18,7 +18,7 @@ describe('Promises support', function () {
   });
 
   it('should resolve with just the response body on success', function (done) {
-    request({
+    request.get({
       url: 'http://www.filltext.com/?rows=1', // return 1 row of data
       fullResponse: false, // to resolve with just the response body
     })
