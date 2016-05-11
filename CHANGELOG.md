@@ -1,5 +1,12 @@
 ## Change Log
 
+### v1.7.1 (2016/05/11 06:24 +00:00)
+- [55ab78a](https://github.com/FGRibreau/node-request-retry/commit/55ab78a92b63309a142f01cd6cb6eac1e3693f7f) Release v1.7.1. (@FGRibreau)
+- [#33](https://github.com/FGRibreau/node-request-retry/pull/33) Merge pull request #33 from tcort/defaultsDeep (@tcort)
+- [b514a81](https://github.com/FGRibreau/node-request-retry/commit/b514a8161ece2d053ded9c52a6ba0a2fad65d6a2) defaults(): use extend for "deep" defaulting (@tcort)
+- [9e29831](https://github.com/FGRibreau/node-request-retry/commit/9e298310f88cd095f28b0b418565551f7c574b8c) docs(changelog): updated (@FGRibreau)
+- [777ca04](https://github.com/FGRibreau/node-request-retry/commit/777ca04cca94b3bc277a59dd53f572179bddead1) fix(changelog): migrated changelog from ruby to js (@FGRibreau)
+
 ### v1.7.0 (2016/05/06 15:52 +00:00)
 - [762e150](https://github.com/FGRibreau/node-request-retry/commit/762e15041b6fc5600e460c973db9dc2530928f2d) Release v1.7.0. (@FGRibreau)
 - [#31](https://github.com/FGRibreau/node-request-retry/pull/31) Merge pull request #31 from tcort/defaults (@tcort)
