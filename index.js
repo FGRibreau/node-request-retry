@@ -99,6 +99,10 @@ Request.prototype._tryUntilFail = function () {
       response.attempts = this.attempts;
     }
     if (this.retryStrategy(err, response) && this.maxAttempts > 0) {
+      if (this.options.retryOptionsUpdater) {
+        // the updater should modify the object
+        this.options.retryOptionsUpdater(this.options);
+      }
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
       return;
     }
