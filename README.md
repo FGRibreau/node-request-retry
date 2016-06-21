@@ -99,7 +99,7 @@ Install with [npm](https://npmjs.org/package/requestretry).
  * @param  {Object} response
  * @return {Boolean} true if the request should be retried
  */
-function myRetryStrategy(err, response){
+function myRetryStrategy(err, response, body){
   // retry the request if we had an error or if the response was a 'Bad Gateway'
   return err || response.statusCode === 502;
 }
