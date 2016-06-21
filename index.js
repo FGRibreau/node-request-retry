@@ -98,7 +98,7 @@ Request.prototype._tryUntilFail = function () {
     if (response) {
       response.attempts = this.attempts;
     }
-    if (this.retryStrategy(err, response) && this.maxAttempts > 0) {
+    if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
       return;
     }
