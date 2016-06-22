@@ -1,5 +1,12 @@
 ## Change Log
 
+### v1.9.0 (2016/06/22 19:11 +00:00)
+- [5bdee74](https://github.com/FGRibreau/node-request-retry/commit/5bdee742e01b555fc8a538f5fce3d2b459ade9b6) Release v1.9.0. (@FGRibreau)
+- [#36](https://github.com/FGRibreau/node-request-retry/pull/36) Merge pull request #36 from themusicroob/patch-1 (@themusicroob)
+- [db7a4ef](https://github.com/FGRibreau/node-request-retry/commit/db7a4ef691dbcacf1fb9daeab9b99873a28eaa6c) Amended for body-dependent retry strategies (@themusicroob)
+- [0f472f9](https://github.com/FGRibreau/node-request-retry/commit/0f472f9287977d62c89c1072604023cd247deefb) Add support for body-dependent retry strategies (@themusicroob)
+- [ca04ea7](https://github.com/FGRibreau/node-request-retry/commit/ca04ea702ff2f58f53b2132b6405282bf247247d) docs(changelog): updated (@FGRibreau)
+
 ### v1.8.0 (2016/05/11 06:25 +00:00)
 - [6767b49](https://github.com/FGRibreau/node-request-retry/commit/6767b497ad0f015bbc87eff65a5f6abd6d9e481e) Release v1.8.0. (@FGRibreau)
 - [#32](https://github.com/FGRibreau/node-request-retry/pull/32) Merge pull request #32 from tcort/helpers (@tcort)
