@@ -19,7 +19,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
-    "changelog": "github-changes --o $(node -p 'process.env.npm_package_repository_url.split(\"/\")[3];') --r $(node -p 'a=process.env.npm_package_repository_url.split(\"/\");a[a.length-1].split(\".\")[0]') --token $CHANGELOG_GITHUB_TOKEN_FG -f CHANGELOG.md",
+    "changelog-init": "conventional-changelog -i CHANGELOG.md -s -r 0",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s",
     "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master"
   },
   "license": "MIT",
@@ -32,7 +33,8 @@
   "devDependencies": {
     "bluebird": "~3.0.5",
     "chai": "^3.2.0",
-    "github-changes": "^1.0.2",
+    "conventional-changelog": "^1.1.0",
+    "conventional-changelog-cli": "^1.2.0",
     "kew": "~0.7.0",
     "mocha": "^2.3.0",
     "nock": "~3.1.0",
