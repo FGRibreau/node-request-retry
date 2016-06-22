@@ -1,4 +1,4 @@
-# Request-retry 
+# Request-retry
 [![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](	https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://drone.io/github.com/FGRibreau/node-request-retry/latest) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry) ![extra](https://img.shields.io/badge/actively%20maintained-yes-ff69b4.svg)
 
 ![NPM](https://nodei.co/npm/requestretry.png?downloadRank=true) ![NPM](https://nodei.co/npm-dl/requestretry.png?months=3&height=2)
@@ -137,6 +137,6 @@ As with `request`, several helpers are provided for various HTTP methods:
 
 ## Donate
 
-I maintain this project in my free time, if it helped you please support my work [via paypal](https://paypal.me/fgribreau) or [Bitcoins](https://www.coinbase.com/fgribreau), thanks a lot!
+I maintain this project in my free time, if it helped you, well, I would be grateful to buy a beer thanks to your [paypal](https://paypal.me/fgribreau) or [Bitcoins](https://www.coinbase.com/fgribreau), donation!
 
-Copyright 2014, [Francois-Guillaume Ribreau](http://fgribreau.com) (npm@fgribreau.com)
+[Francois-Guillaume Ribreau](http://fgribreau.com) (npm@fgribreau.com)
