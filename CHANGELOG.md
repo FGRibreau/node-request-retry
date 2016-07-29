@@ -1,3 +1,14 @@
+<a name="1.9.1"></a>
+## 1.9.1 (2016-07-29)
+
+* fix(changelog) ([9715bd6](https://github.com/FGRibreau/node-request-retry/commit/9715bd6))
+* fix(readme) ([7e8b8c7](https://github.com/FGRibreau/node-request-retry/commit/7e8b8c7))
+* Release v1.9.1. ([852e81c](https://github.com/FGRibreau/node-request-retry/commit/852e81c))
+* Update request to 2.74.0 ([7934049](https://github.com/FGRibreau/node-request-retry/commit/7934049))
+* docs(changelog): updated ([cc717c7](https://github.com/FGRibreau/node-request-retry/commit/cc717c7))
+
+
+
 <a name="1.9.0"></a>
 # 1.9.0 (2016-06-22)
 
