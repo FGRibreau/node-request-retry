@@ -19,6 +19,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
+    "update": "updtr",
     "changelog-init": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "changelog": "conventional-changelog -i CHANGELOG.md -s",
     "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master"
@@ -27,18 +28,19 @@
   "dependencies": {
     "extend": "^3.0.0",
     "fg-lodash": "0.0.2",
-    "request": "^2.74.x",
+    "request": "^2.74.0",
     "when": "~3.7.5"
   },
   "devDependencies": {
-    "bluebird": "~3.0.5",
+    "bluebird": "^3.4.1",
     "chai": "^3.2.0",
     "conventional-changelog": "^1.1.0",
     "conventional-changelog-cli": "^1.2.0",
     "kew": "~0.7.0",
-    "mocha": "^2.3.0",
-    "nock": "~3.1.0",
+    "mocha": "^3.0.2",
+    "nock": "^8.0.0",
     "q": "~1.4.1",
-    "rsvp": "~3.1.0"
+    "rsvp": "^3.2.1",
+    "updtr": "^0.2.1"
   }
 }
