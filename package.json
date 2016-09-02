@@ -11,6 +11,10 @@
     {
       "name": "juliendangers",
       "email": "dev@juliencrestin.com"
+    },
+    {
+      "name": "Osbert Orr",
+      "email": "dev@osbert.net"
     }
   ],
   "repository": {
@@ -41,6 +45,7 @@
     "nock": "^8.0.0",
     "q": "~1.4.1",
     "rsvp": "^3.2.1",
+    "sinon": "1.17.5",
     "updtr": "^0.2.1"
   }
 }

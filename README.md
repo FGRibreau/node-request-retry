@@ -113,6 +113,28 @@ request({
 });
 ```
 
+## How to define your own delay strategy
+
+```
+/**
+ * @param  {Null | Object} err
+ * @param  {Object} response
+ * @return {Number} number of milliseconds to delay
+ */
+function myDelayStrategy(err, response, body){
+  // set delay of retry to a random number between 500 and 3500 ms
+  return Math.floor(Math.random() * (3500 - 500 + 1) + 500);
+}
+
+request({
+  url: 'https://api.domain.com/v1/a/b'
+  json:true,
+  delayStrategy: myDelayStrategy // delayStrategy is called 1 less times than the maxAttempts set
+}, function(err, response, body){
+  // this callback will only be called when the request succeeded or after maxAttempts or on error
+});
+```
+
 ## Modifying `request` options
 
 You can use the `defaults` method to provide default options like so:
