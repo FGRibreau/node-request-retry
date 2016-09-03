@@ -5,6 +5,14 @@ var t = require('chai').assert;
 
 describe('API surface', function () {
 
+  describe('request methods', function(){
+    it('should work with .on', function(f){
+      request('http://httpbin.org/delay/0.1').on('end', function(){
+        f();
+      });
+    });
+  });
+
   describe('callback api', function(){
     [['request', request], ['request.get', request.get]].forEach(function(pair){
       it('should work with '+pair[0]+'(url, f)', function (done) {

@@ -58,6 +58,20 @@ describe('Promises support', function () {
     });
   });
 
+  it('should reject the promise on request aborted', function (done) {
+    var req = request({
+      url: 'http://www.filltext.com/?rows=1', // return 1 row of data
+    });
+
+    req._req = null;
+    req.abort();
+
+    req.catch(function (err) {
+      t.strictEqual(err.message, 'Aborted');
+      done();
+    });
+  });
+
   it('should reject the response on any error', function (done) {
     request({
       url: 'http://localhost:1', // return 1 row of data
