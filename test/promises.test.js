@@ -2,7 +2,6 @@
 
 var request = require('../');
 var t = require('chai').assert;
-var nock = require('nock');
 
 describe('Promises support', function () {
 
@@ -59,25 +58,33 @@ describe('Promises support', function () {
     });
   });
 
-  it('should reject the response on any error', function (done) {
-    nock('http://www.filltext.com')
-      .get('/')
-      .query({rows: 1})
-      .replyWithError('Some error');
-
-    request({
+  it('should reject the promise on request aborted', function (done) {
+    var req = request({
       url: 'http://www.filltext.com/?rows=1', // return 1 row of data
+    });
+
+    req._req = null;
+    req.abort();
+
+    req.catch(function (err) {
+      t.strictEqual(err.message, 'Aborted');
+      done();
+    });
+  });
+
+  it('should reject the response on any error', function (done) {
+    request({
+      url: 'http://localhost:1', // return 1 row of data
       maxAttempts: 1,
+      retryStrategy: request.RetryStrategies.HTTPOrNetworkError
     })
     .catch(function (err) {
-      t.strictEqual(err.message, 'Some error');
+      t.strictEqual(err.message, 'connect ECONNREFUSED 127.0.0.1:1');
       done();
     });
   });
 
   it('should still work with callbacks', function (done) {
-    nock.restore(); // Allow next requests
-
     request({url: 'http://www.filltext.com/?rows=1'}, function requestCallback(err, response, body) {
       t.strictEqual(response.statusCode, 200);
       t.strictEqual(response.attempts, 1);

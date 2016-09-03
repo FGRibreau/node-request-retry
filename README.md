@@ -1,5 +1,10 @@
-# Request-retry
-[![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![Build Status](	https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://drone.io/github.com/FGRibreau/node-request-retry/latest) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry) ![extra](https://img.shields.io/badge/actively%20maintained-yes-ff69b4.svg) [![Twitter Follow](https://img.shields.io/twitter/follow/fgribreau.svg?style=flat)](https://twitter.com/FGRibreau)
+<div align="center">
+  <br><p><strong>request-retry</strong> - HTTP(s) request retry on recoverable errors.</p>
+</div>
+
+=========================================
+
+[![Build Status](https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://circleci.com/gh/FGRibreau/node-request-retry/) [![Coverage Status](https://img.shields.io/coveralls/FGRibreau/node-request-retry/master.svg)](https://coveralls.io/github/FGRibreau/node-request-retry?branch=master) [![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![NPM version](https://img.shields.io/npm/v/requestretry.svg)](http://badge.fury.io/js/requestretry) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry) ![extra](https://img.shields.io/badge/actively%20maintained-yes-ff69b4.svg)
 
 ![NPM](https://nodei.co/npm/requestretry.png?downloadRank=true) ![NPM](https://nodei.co/npm-dl/requestretry.png?months=3&height=2)
 
@@ -121,17 +126,21 @@ You can use the `defaults` method to provide default options like so:
 var request = require('requestretry').defaults({ json: true, retryStrategy: myRetryStrategy });
 ```
 
-## Convenience methods
+## API surface
 
-As with `request`, several helpers are provided for various HTTP methods:
+As with `request`, several helpers are provided for various HTTP methods and usage:
 
-* `request.get(url)` - same as `request(options, callback)` or `request(options)`.
-* `request.head(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `HEAD`.
-* `request.post(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `POST`.
-* `request.put(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `PUT`.
-* `request.patch(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `PATCH`.
-* `request.del(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `DELETE`.
-* `request.delete(url)` - same as `request(options, callback)` or `request(options)`, but it defaults `options.method` to `DELETE`.
+* `request(options [, callback])`.
+* `request(url [, callback])` - same as `request(options [, callback])`.
+* `request(url, options [, callback])` - same as `request(options [, callback])`.
+* `request.get(url [, callback])` - same as `request(options [, callback])`, defaults `options.method` to `GET`.
+* `request.get(url, options  [, callback])` - same as `request(options [, callback])`, defaults `options.method` to `GET`.
+* `request.head(url)` - same as `request(options [, callback])`, defaults `options.method` to `HEAD`.
+* `request.post(url)` - same as `request(options [, callback])`, defaults `options.method` to `POST`.
+* `request.put(url)` - same as `request(options [, callback])`, defaults `options.method` to `PUT`.
+* `request.patch(url)` - same as `request(options [, callback])`, defaults `options.method` to `PATCH`.
+* `request.del(url)` - same as `request(options [, callback])`, defaults `options.method` to `DELETE`.
+* `request.delete(url)` - same as `request(options [, callback])`, defaults `options.method` to `DELETE`.
 
 ## [Changelog](CHANGELOG.md)
 

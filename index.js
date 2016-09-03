@@ -10,9 +10,8 @@
 var extend = require('extend');
 var when = require('when');
 var request = require('request');
-var _ = require('fg-lodash');
 var RetryStrategies = require('./strategies');
-
+var _ = require('lodash');
 
 var DEFAULTS = {
   maxAttempts: 5, // try 5 times
@@ -45,7 +44,29 @@ function makePromise(requestInstance, promiseFactoryFn) {
   return promiseFactoryFn(Resolver.bind(requestInstance));
 }
 
-function Request(options, f, retryConfig) {
+function Request(url, options, f, retryConfig) {
+  // ('url')
+  if(_.isString(url)){
+    // ('url', f)
+    if(_.isFunction(options)){
+      f = options;
+    }
+
+    if(!_.isObject(options)){
+      options = {};
+    }
+
+    // ('url', {object})
+    options.url = url;
+  }
+
+  if(_.isObject(url)){
+    if(_.isFunction(options)){
+      f = options;
+    }
+    options = url;
+  }
+
   this.maxAttempts = retryConfig.maxAttempts;
   this.retryDelay = retryConfig.retryDelay;
   this.fullResponse = retryConfig.fullResponse;
@@ -132,24 +153,39 @@ Request.prototype.abort = function () {
   };
 });
 
-function Factory(options, f) {
-  var retryConfig = _(options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
-  var req = new Request(options, f, retryConfig);
+function Factory(url, options, f) {
+  var retryConfig = _.chain(_.isObject(url) ? url : options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
+  var req = new Request(url, options, f, retryConfig);
   req._tryUntilFail();
   return req;
 }
 
 // adds a helper for HTTP method `verb` to object `obj`
 function makeHelper(obj, verb) {
-  obj[verb] = function helper(options, f) {
-    if (typeof options === 'object') {
-      options.method = verb.toUpperCase();
-    } else if (typeof options === 'string') {
-      options = {
-          method: verb.toUpperCase(),
-          uri: options
-      };
+  obj[verb] = function helper(url, options, f) {
+    // ('url')
+    if(_.isString(url)){
+      // ('url', f)
+      if(_.isFunction(options)){
+        f = options;
+      }
+
+      if(!_.isObject(options)){
+        options = {};
+      }
+
+      // ('url', {object})
+      options.url = url;
     }
+
+    if(_.isObject(url)){
+      if(_.isFunction(options)){
+        f = options;
+      }
+      options = url;
+    }
+
+    options.method = verb.toUpperCase();
     return obj(options, f);
   };
 }
