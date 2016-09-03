@@ -7,4 +7,4 @@ machine:
 test:
   override:
     - npm run test
-    - npm run send-coverage
+    - npm run test-coverage && npm run send-coverage
