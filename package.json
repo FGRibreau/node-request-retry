@@ -23,8 +23,7 @@
     "test-coverage": "nyc --all --statements=100 --lines=100 --functions=100 --branches=100 --check-coverage --reporter=lcov --reporter=cobertura --report-dir=coverage -- mocha -R spec -t 100000  $(find test -name '*.test.js')",
     "send-coverage": "cat ./coverage/lcov.info | coveralls",
     "update": "updtr",
-    "changelog-init": "conventional-changelog -i CHANGELOG.md -s -r 0",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master"
   },
   "license": "MIT",
@@ -44,7 +43,7 @@
     "when": "^3.7.7"
   },
   "devDependencies": {
-    "bluebird": "^3.4.1",
+    "bluebird": "^3.4.6",
     "chai": "^3.2.0",
     "conventional-changelog": "^1.1.0",
     "conventional-changelog-cli": "^1.2.0",
