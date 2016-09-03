@@ -144,7 +144,7 @@ As with `request`, several helpers are provided for various HTTP methods and usa
 
 ## [Changelog](CHANGELOG.md)
 
-## Donate
+## You want to support my work?
 
 I maintain this project in my free time, if it helped you, well, I would be grateful to buy a beer thanks to your [paypal](https://paypal.me/fgribreau) or [Bitcoins](https://www.coinbase.com/fgribreau), donation!
 
