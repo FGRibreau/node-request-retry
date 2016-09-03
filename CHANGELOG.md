@@ -1,3 +1,24 @@
+<a name="1.11.0"></a>
+# 1.11.0 (2016-09-03)
+
+* fix(circle) ([e6c2160](https://github.com/FGRibreau/node-request-retry/commit/e6c2160))
+* fix(deps) ([35921bb](https://github.com/FGRibreau/node-request-retry/commit/35921bb))
+* Release v1.11.0. ([560e402](https://github.com/FGRibreau/node-request-retry/commit/560e402))
+* Update README.md ([85b63ad](https://github.com/FGRibreau/node-request-retry/commit/85b63ad))
+* fix(tests): bring node-request-retry to a 100% code-coverage ([6275780](https://github.com/FGRibreau/node-request-retry/commit/6275780))
+* feat(api): larger api-surface, just like `request` ([1527f9d](https://github.com/FGRibreau/node-request-retry/commit/1527f9d))
+
+
+
+<a name="1.10.0"></a>
+# 1.10.0 (2016-08-18)
+
+* Release v1.10.0. ([b1fbef5](https://github.com/FGRibreau/node-request-retry/commit/b1fbef5))
+* feat(updtr): use updtr ([85bc2c6](https://github.com/FGRibreau/node-request-retry/commit/85bc2c6))
+* docs(changelog): updated ([4e174ab](https://github.com/FGRibreau/node-request-retry/commit/4e174ab))
+
+
+
 <a name="1.9.1"></a>
 ## 1.9.1 (2016-07-29)
 
