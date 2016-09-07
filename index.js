@@ -83,6 +83,7 @@ function Request(url, options, f, retryConfig) {
    * @type {Function} (err, response) -> Boolean
    */
   this.retryStrategy = _.isFunction(options.retryStrategy) ? options.retryStrategy : RetryStrategies.HTTPOrNetworkError;
+  this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function() { return this.retryDelay; };
 
   this._timeout = null;
   this._req = null;
@@ -120,7 +121,7 @@ Request.prototype._tryUntilFail = function () {
       response.attempts = this.attempts;
     }
     if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
-      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.retryDelay);
+      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body));
       return;
     }
 
