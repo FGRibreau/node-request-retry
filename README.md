@@ -4,7 +4,7 @@
 
 =========================================
 
-[![Build Status](https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://circleci.com/gh/FGRibreau/node-request-retry/) [![Coverage Status](https://img.shields.io/coveralls/FGRibreau/node-request-retry/master.svg)](https://coveralls.io/github/FGRibreau/node-request-retry?branch=master) [![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![NPM version](https://img.shields.io/npm/v/requestretry.svg)](http://badge.fury.io/js/requestretry) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry) 
+[![Build Status](https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://circleci.com/gh/FGRibreau/node-request-retry/) [![Coverage Status](https://img.shields.io/coveralls/FGRibreau/node-request-retry/master.svg)](https://coveralls.io/github/FGRibreau/node-request-retry?branch=master) [![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![NPM version](https://img.shields.io/npm/v/requestretry.svg)](http://badge.fury.io/js/requestretry) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry)
 
 [![available-for-advisory](https://img.shields.io/badge/available%20for%20consulting%20advisory-yes-ff69b4.svg?)](http://bit.ly/2c7uFJq) ![extra](https://img.shields.io/badge/actively%20maintained-yes-ff69b4.svg)
 
@@ -100,10 +100,13 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 ## How to define your own retry strategy
 
+A retry strategy let you specify when request-retry should retry a request
+
 ```
 /**
  * @param  {Null | Object} err
  * @param  {Object} response
+ * @param  {Object} body
  * @return {Boolean} true if the request should be retried
  */
 function myRetryStrategy(err, response, body){
@@ -122,11 +125,14 @@ request({
 
 ## How to define your own delay strategy
 
+A delay strategy let you specify how long request-retry should wait before trying again the request
+
 ```
 /**
  * @param  {Null | Object} err
  * @param  {Object} response
- * @return {Number} number of milliseconds to delay
+ * @param  {Object} body
+ * @return {Number} number of milliseconds to wait before trying again the request
  */
 function myDelayStrategy(err, response, body){
   // set delay of retry to a random number between 500 and 3500 ms

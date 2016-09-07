@@ -83,6 +83,11 @@ function Request(url, options, f, retryConfig) {
    * @type {Function} (err, response) -> Boolean
    */
   this.retryStrategy = _.isFunction(options.retryStrategy) ? options.retryStrategy : RetryStrategies.HTTPOrNetworkError;
+
+  /**
+   * Return a number representing how long request-retry should wait before trying again the request
+   * @type {Boolean} (err, response, body) -> Number
+   */
   this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function() { return this.retryDelay; };
 
   this._timeout = null;

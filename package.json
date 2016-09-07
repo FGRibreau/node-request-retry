@@ -22,7 +22,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha -t 1000 -R spec $(find test -name '*.test.js')",
+    "test": "mocha -t 2000 -R spec $(find test -name '*.test.js')",
     "test-watch": "mocha -t 100000 -R min -w $(find test -name '*.test.js')",
     "test-coverage": "nyc --all --statements=100 --lines=100 --functions=100 --branches=100 --check-coverage --reporter=lcov --reporter=cobertura --report-dir=coverage -- mocha -R spec -t 100000  $(find test -name '*.test.js')",
     "send-coverage": "cat ./coverage/lcov.info | coveralls",
