@@ -1,3 +1,17 @@
+<a name="1.12.0"></a>
+# 1.12.0 (2016-09-07)
+
+* Add delay strategy ([ce99e46](https://github.com/FGRibreau/node-request-retry/commit/ce99e46))
+* docs(delayStrategy) ([be1fdc3](https://github.com/FGRibreau/node-request-retry/commit/be1fdc3))
+* Release v1.12.0. ([aef934c](https://github.com/FGRibreau/node-request-retry/commit/aef934c))
+* Update README.md ([d1fc2ea](https://github.com/FGRibreau/node-request-retry/commit/d1fc2ea))
+* Update README.md ([fecda40](https://github.com/FGRibreau/node-request-retry/commit/fecda40))
+* Update README.md ([b7e4133](https://github.com/FGRibreau/node-request-retry/commit/b7e4133))
+* Update README.md ([5db9276](https://github.com/FGRibreau/node-request-retry/commit/5db9276))
+* docs(changelog): updated ([757ac28](https://github.com/FGRibreau/node-request-retry/commit/757ac28))
+
+
+
 <a name="1.11.0"></a>
 # 1.11.0 (2016-09-03)
 
