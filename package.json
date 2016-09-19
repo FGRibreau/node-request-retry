@@ -51,7 +51,7 @@
     "chai": "^3.2.0",
     "conventional-changelog": "^1.1.0",
     "conventional-changelog-cli": "^1.2.0",
-    "coveralls": "^2.11.12",
+    "coveralls": "^2.11.14",
     "kew": "~0.7.0",
     "mocha": "^3.0.2",
     "nyc": "^8.1.0",
