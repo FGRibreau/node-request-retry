@@ -93,6 +93,22 @@ request({
 })
 ```
 
+**Using `rejectOnRetryStrategyFail` option to reject the promise on retryStrategy fail**
+
+```javascript
+  request({
+    url: 'https://api.domain.com/v1/a/b',
+    rejectOnRetryStrategyFail: true, // enable reject on failed retryStrategy
+    retryStrategy: function (err, response, body) {
+      return err || (response && response.statusCode === 500);
+    }
+  })
+  .catch(function (err) {
+    // This function will be called if `retryStrategy` returns true after exhausting all attempts.
+    // `err` will have `response` and `body` property set, if the underlying request received a response from the server.
+  });
+```
+
 ## Installation
 
 Install with [npm](https://npmjs.org/package/requestretry).
