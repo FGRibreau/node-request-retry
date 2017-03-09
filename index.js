@@ -90,6 +90,12 @@ function Request(url, options, f, retryConfig) {
    */
   this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function() { return this.retryDelay; };
 
+  /**
+   * Should request be rejected when retryStrategy fails even if the underlying request suceeds
+   * @type {Boolean}
+   */
+  this.rejectOnRetryStrategyFail = options.rejectOnRetryStrategyFail || false;
+
   this._timeout = null;
   this._req = null;
 
@@ -100,12 +106,21 @@ function Request(url, options, f, retryConfig) {
     this._promise = makePromise(this, retryConfig.promiseFactory);
   }
 
-  this.reply = function requestRetryReply(err, response, body) {
+  this.reply = function requestRetryReply(err, response, body, failed) {
     if (this._callback) {
       return this._callback(err, response, body);
     }
 
     if (err) {
+      return this._reject(err);
+    }
+
+    if (failed) {
+      err = new Error('Request failed retryStrategy check');
+
+      err.response = response;
+      err.body = body;
+
       return this._reject(err);
     }
 
@@ -125,9 +140,15 @@ Request.prototype._tryUntilFail = function () {
     if (response) {
       response.attempts = this.attempts;
     }
-    if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
-      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body));
-      return;
+    if (this.retryStrategy(err, response, body)) {
+      if (this.maxAttempts > 0) {
+        this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body));
+        return;
+      }
+      if (this.rejectOnRetryStrategyFail) {
+        this.reply(err, response, body, true);
+        return;
+      }
     }
 
     this.reply(err, response, body);

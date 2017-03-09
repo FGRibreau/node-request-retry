@@ -39,9 +39,10 @@ request({
 
 ### With promises
 
-When you're using promises, you can pass the two following options:
+When you're using promises, you can pass the three following options:
 - `fullResponse` _(default true)_ - To resolve the promise with the full response or just the body
 - `promiseFactory` _(default whenjs)_ - A function to allow the usage of a different promise implementation library
+- `rejectOnRetryStrategyFail` _(default false)_ - Indicates whether the request fails if retryStrategy returned true, even if the underlying request succeeded in getting a response from server.
 
 ```javascript
 request({
