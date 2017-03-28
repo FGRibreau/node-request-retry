@@ -2,7 +2,7 @@
   <br><p><strong>request-retry</strong> - HTTP(s) request retry on recoverable errors.</p>
 </div>
 
-=========================================
+------------------------------------------------
 
 [![Build Status](https://img.shields.io/circleci/project/FGRibreau/node-request-retry.svg)](https://circleci.com/gh/FGRibreau/node-request-retry/) [![Coverage Status](https://img.shields.io/coveralls/FGRibreau/node-request-retry/master.svg)](https://coveralls.io/github/FGRibreau/node-request-retry?branch=master) [![Deps](	https://img.shields.io/david/FGRibreau/node-request-retry.svg)](https://david-dm.org/FGRibreau/node-request-retry) [![NPM version](https://img.shields.io/npm/v/requestretry.svg)](http://badge.fury.io/js/requestretry) [![Downloads](http://img.shields.io/npm/dm/requestretry.svg)](https://www.npmjs.com/package/requestretry)
 
