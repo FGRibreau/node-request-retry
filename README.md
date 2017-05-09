@@ -102,7 +102,7 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 A retry strategy let you specify when request-retry should retry a request
 
-```
+```javascript
 /**
  * @param  {Null | Object} err
  * @param  {Object} response
@@ -127,7 +127,7 @@ request({
 
 A delay strategy let you specify how long request-retry should wait before trying again the request
 
-```
+```javascript
 /**
  * @param  {Null | Object} err
  * @param  {Object} response
@@ -152,7 +152,7 @@ request({
 
 You can use the `defaults` method to provide default options like so:
 
-```js
+```javascript
 var request = require('requestretry').defaults({ json: true, retryStrategy: myRetryStrategy });
 ```
 
