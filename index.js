@@ -217,7 +217,7 @@ function defaults(defaultOptions, defaultF) {
   factory.del = factory['delete'];
 
   ['jar', 'cookie'].forEach(function (method) {
-    factory[method] = Factory.Request.request[method];
+    factory[method] = factory.Request.request[method];
   });
 
   return factory;
