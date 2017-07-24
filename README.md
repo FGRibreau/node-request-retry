@@ -12,6 +12,12 @@
 
 When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOUT`, `ETIMEDOUT`, `ECONNREFUSED`, `EHOSTUNREACH`, `EPIPE`, `EAI_AGAIN` or when an HTTP 5xx error occurrs, the request will automatically be re-attempted as these are often recoverable errors and will go away on retry.
 
+## Installation
+
+Install with [npm](https://npmjs.org/package/requestretry).
+
+    npm install --save requestretry
+
 ## Usage
 
 Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response, `attempts`. It supports callbacks or promises.
@@ -22,8 +28,8 @@ Request-retry is a drop-in replacement for [request](https://github.com/mikeal/r
 var request = require('requestretry');
 
 request({
-  url: 'https://api.domain.com/v1/a/b'
-  json:true,
+  url: 'https://api.domain.com/v1/a/b',
+  json: true,
 
   // The below parameters are specific to request-retry
   maxAttempts: 5,   // (default) try 5 times
@@ -45,8 +51,8 @@ When you're using promises, you can pass the two following options:
 
 ```javascript
 request({
-  url: 'https://api.domain.com/v1/a/b'
-  json:true,
+  url: 'https://api.domain.com/v1/a/b',
+  json: true,
 
   fullResponse: true // (default) To resolve the promise with the full response or just the body
 })
@@ -78,8 +84,8 @@ function customPromiseFactory(resolver) {
 }
 
 request({
-  url: 'https://api.domain.com/v1/a/b'
-  json:true,
+  url: 'https://api.domain.com/v1/a/b',
+  json: true,
 
   // Custom promise factory function
   promiseFactory: customPromiseFactory
@@ -91,12 +97,6 @@ request({
   // error = Any occurred error
 })
 ```
-
-## Installation
-
-Install with [npm](https://npmjs.org/package/requestretry).
-
-    npm install --save requestretry
 
 ## How to define your own retry strategy
 
