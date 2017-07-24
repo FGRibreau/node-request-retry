@@ -235,6 +235,6 @@ Factory.RetryStrategies = RetryStrategies;
 });
 Factory.del = Factory['delete'];
 
-  ['jar','cookie'].forEach(function (method) {
+  ['jar', 'cookie'].forEach(function (method) {
     Factory[method] = Factory.Request.request[method];
 });
