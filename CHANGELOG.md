@@ -1,3 +1,27 @@
+<a name="1.12.2"></a>
+## 1.12.2 (2017-08-01)
+
+* Added .auth, .jar and .cookie implementations along with corresponding tests ([15afe79](https://github.com/FGRibreau/node-request-retry/commit/15afe79))
+* formatting updated + version bump ([6ad6f09](https://github.com/FGRibreau/node-request-retry/commit/6ad6f09))
+* Improve README. ([5052add](https://github.com/FGRibreau/node-request-retry/commit/5052add))
+* minor fix ([5b3f6d1](https://github.com/FGRibreau/node-request-retry/commit/5b3f6d1))
+* Release v1.12.1. ([a1d198a](https://github.com/FGRibreau/node-request-retry/commit/a1d198a))
+* Release v1.12.2. ([eba306c](https://github.com/FGRibreau/node-request-retry/commit/eba306c))
+* revert ([d6a840f](https://github.com/FGRibreau/node-request-retry/commit/d6a840f))
+* split various.test.js in auth.test.js and cookie.test.js ([c80272b](https://github.com/FGRibreau/node-request-retry/commit/c80272b))
+* Update package.json ([9619999](https://github.com/FGRibreau/node-request-retry/commit/9619999))
+* Update README.md ([9a50640](https://github.com/FGRibreau/node-request-retry/commit/9a50640))
+* Update README.md ([ada51e3](https://github.com/FGRibreau/node-request-retry/commit/ada51e3))
+* Update README.md ([984fd17](https://github.com/FGRibreau/node-request-retry/commit/984fd17))
+* Update README.md ([94b8c01](https://github.com/FGRibreau/node-request-retry/commit/94b8c01))
+* chore(package): update dependencies ([85c62ac](https://github.com/FGRibreau/node-request-retry/commit/85c62ac))
+* chore(package): update nyc to version 10.0.0 ([f652825](https://github.com/FGRibreau/node-request-retry/commit/f652825))
+* chore(package): update nyc to version 9.0.1 ([e376616](https://github.com/FGRibreau/node-request-retry/commit/e376616))
+* chore(package): update sinon to version 1.17.6 ([2735e7c](https://github.com/FGRibreau/node-request-retry/commit/2735e7c))
+* docs(changelog): updated ([448b9e1](https://github.com/FGRibreau/node-request-retry/commit/448b9e1))
+
+
+
 <a name="1.12.0"></a>
 # 1.12.0 (2016-09-07)
 
