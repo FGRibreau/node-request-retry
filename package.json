@@ -1,7 +1,7 @@
 {
   "name": "requestretry",
   "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
