@@ -143,7 +143,7 @@ Request.prototype.abort = function () {
 };
 
 // expose request methods from RequestRetry
-['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write'].forEach(function (requestMethod) {
+['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write', 'auth'].forEach(function (requestMethod) {
   Request.prototype[requestMethod] = function exposedRequestMethod () {
     return this._req[requestMethod].apply(this._req, arguments);
   };
@@ -216,6 +216,10 @@ function defaults(defaultOptions, defaultF) {
   });
   factory.del = factory['delete'];
 
+  ['jar', 'cookie'].forEach(function (method) {
+    factory[method] = factory.Request.request[method];
+  });
+
   return factory;
 }
 
@@ -230,3 +234,7 @@ Factory.RetryStrategies = RetryStrategies;
   makeHelper(Factory, verb);
 });
 Factory.del = Factory['delete'];
+
+['jar', 'cookie'].forEach(function (method) {
+  Factory[method] = Factory.Request.request[method];
+});

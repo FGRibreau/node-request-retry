@@ -11,7 +11,7 @@ describe('Defaults', function () {
     });
     r('http://www.filltext.com/?rows=1', function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
-      t.strictEqual(body[0].d, 1);
+      t.isNumber(body[0].d);
       done();
     });
   });
@@ -19,7 +19,7 @@ describe('Defaults', function () {
   it('should set a default function', function (done) {
     var r = request.defaults({}, function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
-      t.strictEqual(body[0].d, 1);
+      t.isNumber(body[0].d);
       done();
     });
     r({ url: 'http://www.filltext.com/?rows=1&d={index}', json: true });
@@ -32,7 +32,7 @@ describe('Defaults', function () {
     });
     r.get({ url: 'http://www.filltext.com/?rows=1', qs: { d: "{index}" } }, function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
-      t.strictEqual(body[0].d, 1);
+      t.isNumber(body[0].d);
       done();
     });
   });
@@ -49,7 +49,7 @@ describe('Defaults', function () {
         fullResponse: false
     });
     level2.get('/?rows=1').then(function (body) {
-      t.strictEqual(body[0].d, 1);
+      t.isNumber(body[0].d);
       done();
     });
   });
@@ -61,7 +61,7 @@ describe('Defaults', function () {
     });
     r({ url: 'http://www.filltext.com/?rows=1', qs: { x: "test" } }, function (err, response, body) {
       t.strictEqual(response.statusCode, 200);
-      t.strictEqual(body[0].d, 1);
+      t.isNumber(body[0].d);
       t.strictEqual(body[0].x, "test");
       done();
     });
