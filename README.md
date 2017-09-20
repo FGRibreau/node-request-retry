@@ -33,7 +33,8 @@ request({
 
   // The below parameters are specific to request-retry
   maxAttempts: 5,   // (default) try 5 times
-  retryDelay: 5000,  // (default) wait for 5s before trying again
+  retryDelay: 5000,  // (default) wait for 5s before trying again. (only used for RetryDelay Strategy)
+  delayStrategy: request.DelayStrategies.RetryDelay, // Use hardcoded value instead of a strategy
   retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
 }, function(err, response, body){
   // this callback will only be called when the request succeeded or after maxAttempts or on error
@@ -115,7 +116,7 @@ function myRetryStrategy(err, response, body){
 }
 
 request({
-  url: 'https://api.domain.com/v1/a/b'
+  url: 'https://api.domain.com/v1/a/b',
   json:true,
   retryStrategy: myRetryStrategy
 }, function(err, response, body){
@@ -125,7 +126,7 @@ request({
 
 ## How to define your own delay strategy
 
-A delay strategy let you specify how long request-retry should wait before trying again the request
+A delay strategy let you specify how long request-retry should wait before trying again the request. The default behavior is to use an exponential backoff algorithm.
 
 ```javascript
 /**
@@ -134,13 +135,13 @@ A delay strategy let you specify how long request-retry should wait before tryin
  * @param  {Object} body
  * @return {Number} number of milliseconds to wait before trying again the request
  */
-function myDelayStrategy(err, response, body){
+function myDelayStrategy(err, response, body, attempts) {
   // set delay of retry to a random number between 500 and 3500 ms
   return Math.floor(Math.random() * (3500 - 500 + 1) + 500);
 }
 
 request({
-  url: 'https://api.domain.com/v1/a/b'
+  url: 'https://api.domain.com/v1/a/b',
   json:true,
   delayStrategy: myDelayStrategy // delayStrategy is called 1 less times than the maxAttempts set
 }, function(err, response, body){
