@@ -31,7 +31,7 @@ function defaultPromiseFactory(resolver) {
  *
  * @param {Object} requestInstance - The Request Retry instance
  * @param {Function} promiseFactoryFn - The Request Retry instance
- * @return {Number} - The promise instance
+ * @return {Object} - The promise instance
  */
 function makePromise(requestInstance, promiseFactoryFn) {
 
