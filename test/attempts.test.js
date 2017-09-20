@@ -17,7 +17,8 @@ describe('Request attempts', function () {
     request({
       url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
       maxAttempts: 3,
-      retryDelay: 100
+      retryDelay: 100,
+      delayStrategy: request.DelayStrategies.RetryDelay
     }, function (err, response, body) {
       t.strictEqual(response.statusCode, 500);
       t.strictEqual(response.attempts, 3);
