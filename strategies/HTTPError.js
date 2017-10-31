@@ -6,5 +6,5 @@
  * @return {Boolean} true if the request had a recoverable HTTP error
  */
 module.exports = function HTTPError(err, response) {
-  return response && 500 <= response.statusCode && response.statusCode < 600;
+  return response && ((500 <= response.statusCode && response.statusCode < 600) || response.statusCode === 408);
 };
