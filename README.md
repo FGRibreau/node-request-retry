@@ -153,7 +153,7 @@ request({
 });
 ```
 
-Example exponential backoff strategy:
+Here is how to implement an exponential backoff strategy:
 
 ```javascript
 /**
