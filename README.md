@@ -153,6 +153,34 @@ request({
 });
 ```
 
+Here is how to implement an exponential backoff strategy:
+
+```javascript
+/**
+ * @param   {Number} attempts The number of times that the request has been attempted.
+ * @return  {Number} number of milliseconds to wait before retrying again the request.
+ */
+function getExponentialBackoff(attempts) {
+  const delay = (Math.pow(2, attempts) * 100) + Math.floor(Math.random() * 50);
+}
+
+function constructExponentialBackoffStrategy() {
+  let attempts = 0;
+  return () => {
+    attempts += 1;
+    return getExponentialBackoff(attempts);
+  };
+}
+
+request({
+  url: 'https://api.domain.com/v1/a/b'
+  json:true,
+  delayStrategy: constructExponentialBackoffStrategy() // need to invoke the function to return the closure.
+}, function(err, response, body){
+  // this callback will only be called when the request succeeded or after maxAttempts or on error
+});
+```
+
 ## Modifying `request` options
 
 You can use the `defaults` method to provide default options like so:
