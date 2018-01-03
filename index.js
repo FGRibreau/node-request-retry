@@ -10,7 +10,8 @@
 var extend = require('extend');
 var when = require('when');
 var request = require('request');
-var RetryStrategies = require('./strategies');
+var RetryStrategies = require('./strategies/retry');
+var DelayStrategies = require('./strategies/delay');
 var _ = require('lodash');
 
 var DEFAULTS = {
@@ -86,9 +87,9 @@ function Request(url, options, f, retryConfig) {
 
   /**
    * Return a number representing how long request-retry should wait before trying again the request
-   * @type {Boolean} (err, response, body) -> Number
+   * @type {Boolean} (err, response, body, attempts) -> Number
    */
-  this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function() { return this.retryDelay; };
+  this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy :  DelayStrategies.Exponential;
 
   this._timeout = null;
   this._req = null;
@@ -126,7 +127,7 @@ Request.prototype._tryUntilFail = function () {
       response.attempts = this.attempts;
     }
     if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
-      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body));
+      this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body, this.attempts, this.retryDelay));
       return;
     }
 
@@ -228,6 +229,7 @@ module.exports = Factory;
 Factory.defaults = defaults;
 Factory.Request = Request;
 Factory.RetryStrategies = RetryStrategies;
+Factory.DelayStrategies = DelayStrategies;
 
 // define .get/.post/... helpers
 ['get', 'head', 'post', 'put', 'patch', 'delete'].forEach(function (verb) {
