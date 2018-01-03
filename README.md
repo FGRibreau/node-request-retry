@@ -161,7 +161,7 @@ Here is how to implement an exponential backoff strategy:
  * @return  {Number} number of milliseconds to wait before retrying again the request.
  */
 function getExponentialBackoff(attempts) {
-  const delay = (Math.pow(2, attempts) * 100) + Math.floor(Math.random() * 50);
+  return (Math.pow(2, attempts) * 100) + Math.floor(Math.random() * 50);
 }
 
 function constructExponentialBackoffStrategy() {
