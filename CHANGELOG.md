@@ -1,3 +1,13 @@
+<a name="1.13.0"></a>
+# 1.13.0 (2018-01-18)
+
+* fix(logic) ([3c4751e](https://github.com/FGRibreau/node-request-retry/commit/3c4751e))
+* Release v1.13.0. ([8382911](https://github.com/FGRibreau/node-request-retry/commit/8382911))
+* style(package) ([f1ecd63](https://github.com/FGRibreau/node-request-retry/commit/f1ecd63))
+* docs(changelog): updated ([d8c94c3](https://github.com/FGRibreau/node-request-retry/commit/d8c94c3))
+
+
+
 <a name="1.12.3"></a>
 ## 1.12.3 (2018-01-18)
 
