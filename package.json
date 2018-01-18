@@ -1,6 +1,7 @@
 {
   "name": "requestretry",
-  "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
+  "description":
+    "request-retry wrap nodejs request to retry http(s) requests in case of error",
   "version": "1.12.3",
   "author": {
     "name": "Francois-Guillaume Ribreau",
@@ -24,21 +25,18 @@
   "scripts": {
     "test": "mocha -t 2000 -R spec $(find test -name '*.test.js')",
     "test-watch": "mocha -t 100000 -R min -w $(find test -name '*.test.js')",
-    "test-coverage": "nyc --all --statements=100 --lines=100 --functions=100 --branches=100 --check-coverage --reporter=lcov --reporter=cobertura --report-dir=coverage -- mocha -R spec -t 100000  $(find test -name '*.test.js')",
+    "test-coverage":
+      "nyc --all --statements=100 --lines=100 --functions=100 --branches=100 --check-coverage --reporter=lcov --reporter=cobertura --report-dir=coverage -- mocha -R spec -t 100000  $(find test -name '*.test.js')",
     "send-coverage": "cat ./coverage/lcov.info | coveralls",
     "update": "updtr",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
-    "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master"
+    "changelog-git":
+      "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master",
+    "postpublish": "npm run --silent changelog-git"
   },
   "license": "MIT",
   "nyc": {
-    "exclude": [
-      "node_modules",
-      "dist",
-      "coverage",
-      "webpack.config.js",
-      "test"
-    ]
+    "exclude": ["node_modules", "dist", "coverage", "webpack.config.js", "test"]
   },
   "dependencies": {
     "extend": "^3.0.0",
