@@ -25,9 +25,9 @@ describe('Request attempts', function () {
     });
   });
 
-  it('should show 3 attempts after rerty even when a network error happens and response object is undefined', function (done) {
+  it('should show 3 attempts after retry even when a network error happens and response object is undefined', function (done) {
     request({
-      url: 'http://www.whatever-non-existant-domain-here.com/', // return a 500 status
+      url: 'http://www.whatever-non-existant-domain-here.com/', // return a Could not resolve host: error
       maxAttempts: 3,
       retryDelay: 100
     }, function (err, response, body) {
