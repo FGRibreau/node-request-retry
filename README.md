@@ -25,7 +25,7 @@ Install with [npm](https://npmjs.org/package/requestretry).
 
 ## Usage
 
-Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response, `attempts`. It supports callbacks or promises.
+Request-retry is a drop-in replacement for [request](https://github.com/mikeal/request) but adds two new options `maxAttempts` and `retryDelay`. It also adds one property to the response (or the error object, upon a network error), `attempts`. It supports callbacks or promises.
 
 ### With callbacks
 

@@ -25,6 +25,18 @@ describe('Request attempts', function () {
     });
   });
 
+  it('should show 3 attempts after retry even when a network error happens and response object is undefined', function (done) {
+    request({
+      url: 'http://www.whatever-non-existant-domain-here.com/', // return a Could not resolve host: error
+      maxAttempts: 3,
+      retryDelay: 100
+    }, function (err, response, body) {
+      t.strictEqual(err.attempts, 3);
+      t.strictEqual(response, undefined);
+      done();
+    });
+  });
+
   it('should call delay strategy 2 times after some retries', function (done) {
     var mockDelayStrategy = sinon.stub().returns(500);
     var startTime = process.hrtime();
