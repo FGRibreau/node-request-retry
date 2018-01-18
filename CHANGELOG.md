@@ -1,3 +1,19 @@
+<a name="1.12.3"></a>
+## 1.12.3 (2018-01-18)
+
+* Added testing for error object attempts reporting ([578870f](https://github.com/FGRibreau/node-request-retry/commit/578870f))
+* Added the attempts property and assigned it to the error object returned when a network error occurs ([ecd9f5c](https://github.com/FGRibreau/node-request-retry/commit/ecd9f5c))
+* Adds exponential backoff example to readme. ([184b84f](https://github.com/FGRibreau/node-request-retry/commit/184b84f))
+* Release v1.12.3. ([57bb3d8](https://github.com/FGRibreau/node-request-retry/commit/57bb3d8))
+* Typo in Readme for Exponential Backoff Delay. ([b9ef000](https://github.com/FGRibreau/node-request-retry/commit/b9ef000))
+* Update attempts.test.js ([32a699d](https://github.com/FGRibreau/node-request-retry/commit/32a699d))
+* Update README.md ([9d1367b](https://github.com/FGRibreau/node-request-retry/commit/9d1367b))
+* Update README.md ([eed7f88](https://github.com/FGRibreau/node-request-retry/commit/eed7f88))
+* chore(git): remove package-lock.json from gitignore ([08631fa](https://github.com/FGRibreau/node-request-retry/commit/08631fa))
+* docs(changelog): updated ([cbe2355](https://github.com/FGRibreau/node-request-retry/commit/cbe2355))
+
+
+
 <a name="1.12.2"></a>
 ## 1.12.2 (2017-08-01)
 
