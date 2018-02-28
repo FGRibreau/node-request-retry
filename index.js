@@ -44,6 +44,16 @@ function makePromise(requestInstance, promiseFactoryFn) {
   return promiseFactoryFn(Resolver.bind(requestInstance));
 }
 
+/**
+ * Checks if the returned response is an error response.
+ *
+ * @param response a Node's http.IncomingMessage object
+ * @return boolean true if the response status is 4XX or 5XX
+ */
+function isErrorResponse(response) {
+  return 400 <= response.statusCode && response.statusCode < 600
+}
+
 function Request(url, options, f, retryConfig) {
   // ('url')
   if(_.isString(url)){
@@ -107,6 +117,10 @@ function Request(url, options, f, retryConfig) {
 
     if (err) {
       return this._reject(err);
+    }
+
+    if (isErrorResponse(response)) {
+      return this._reject(this.fullResponse ? response : body);
     }
 
     // resolve with the full response or just the body
