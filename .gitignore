@@ -3,3 +3,5 @@ npm-debug.log
 .env
 coverage
 .vscode
+.idea
+
