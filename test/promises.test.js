@@ -96,7 +96,8 @@ describe('Promises support', function () {
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError
     })
       .catch(function (err) {
-        t.strictEqual(err.body, 'Client Error');
+        t.strictEqual(err.statusCode, 400);
+        t.strictEqual(err.error, 'Client Error');
         done();
       });
   });
@@ -112,7 +113,8 @@ describe('Promises support', function () {
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError
     })
       .catch(function (err) {
-        t.strictEqual(err.body, 'Server Error');
+        t.strictEqual(err.statusCode, 500);
+        t.strictEqual(err.error, 'Server Error');
         done();
       });
   });
@@ -162,7 +164,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -180,7 +183,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -203,7 +207,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .fail(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -223,7 +228,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });

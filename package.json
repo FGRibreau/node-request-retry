@@ -1,7 +1,7 @@
 {
   "name": "@hmcts/requestretry",
   "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
@@ -46,6 +46,7 @@
     "extend": "^3.0.0",
     "lodash": "^4.15.0",
     "request": "^2.74.0",
+    "request-promise-core": "^1.1.1",
     "when": "^3.7.7"
   },
   "devDependencies": {
