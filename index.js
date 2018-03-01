@@ -11,6 +11,7 @@ var extend = require('extend');
 var when = require('when');
 var request = require('request');
 var RetryStrategies = require('./strategies');
+var isErrorResponse = require('./helpers/isErrorResponse')
 var _ = require('lodash');
 
 var DEFAULTS = {
@@ -107,6 +108,10 @@ function Request(url, options, f, retryConfig) {
 
     if (err) {
       return this._reject(err);
+    }
+
+    if (isErrorResponse(response)) {
+      return this._reject(this.fullResponse ? response : body);
     }
 
     // resolve with the full response or just the body
