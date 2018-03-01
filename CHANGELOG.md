@@ -1,8 +1,10 @@
-<a name="1.0.1"></a>
-## 1.0.1 (2018-03-01)
+<a name="1.1.0"></a>
+# 1.1.0 (2018-03-01)
 
 * Bump versions as bad package-lock published ([66f0164](https://github.com/hmcts/node-request-retry/commit/66f0164))
 * Reject promises on 4XX and 5XX responses (#1) ([2dca4b3](https://github.com/hmcts/node-request-retry/commit/2dca4b3))
+* Reject promises with request-promise StatusCodeError (#2) ([50fed0f](https://github.com/hmcts/node-request-retry/commit/50fed0f))
+* docs(changelog): updated ([282c849](https://github.com/hmcts/node-request-retry/commit/282c849))
 * docs(changelog): updated ([2cff7a4](https://github.com/hmcts/node-request-retry/commit/2cff7a4))
 * docs(changelog): updated ([54a604a](https://github.com/hmcts/node-request-retry/commit/54a604a))
 
