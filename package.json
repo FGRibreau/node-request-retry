@@ -63,8 +63,6 @@
     "rsvp": "^3.2.1",
     "sinon": "1.17.6",
     "updtr": "^0.2.1"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
+
