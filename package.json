@@ -1,7 +1,7 @@
 {
   "name": "requestretry",
   "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
-  "version": "1.13.0",
+  "version": "2.0.0",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
@@ -18,6 +18,7 @@
     }
   ],
   "repository": {
+    "type": "git",
     "url": "https://github.com/FGRibreau/node-request-retry"
   },
   "main": "index.js",
@@ -45,6 +46,7 @@
     "extend": "^3.0.0",
     "lodash": "^4.15.0",
     "request": "^2.74.0",
+    "request-promise-core": "^1.1.1",
     "when": "^3.7.7"
   },
   "devDependencies": {
@@ -55,6 +57,7 @@
     "coveralls": "^2.11.12",
     "kew": "~0.7.0",
     "mocha": "^3.0.2",
+    "nock": "^9.2.3",
     "nyc": "^10.0.0",
     "q": "~1.4.1",
     "rsvp": "^3.2.1",
@@ -62,3 +65,4 @@
     "updtr": "^0.2.1"
   }
 }
+

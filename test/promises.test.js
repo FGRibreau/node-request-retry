@@ -2,6 +2,7 @@
 
 var request = require('../');
 var t = require('chai').assert;
+var nock = require('nock')
 
 describe('Promises support', function () {
 
@@ -84,6 +85,40 @@ describe('Promises support', function () {
     });
   });
 
+  it('should reject the promise on 400 response', function (done) {
+    nock('http://some-test-host')
+      .get('/return-400')
+      .reply(400, 'Client Error');
+
+    request({
+      url: 'http://some-test-host/return-400',
+      maxAttempts: 1,
+      retryStrategy: request.RetryStrategies.HTTPOrNetworkError
+    })
+      .catch(function (err) {
+        t.strictEqual(err.statusCode, 400);
+        t.strictEqual(err.error, 'Client Error');
+        done();
+      });
+  });
+
+  it('should reject the promise on 500 response', function (done) {
+    nock('http://some-test-host')
+      .get('/return-500')
+      .reply(500, 'Server Error');
+
+    request({
+      url: 'http://some-test-host/return-500',
+      maxAttempts: 1,
+      retryStrategy: request.RetryStrategies.HTTPOrNetworkError
+    })
+      .catch(function (err) {
+        t.strictEqual(err.statusCode, 500);
+        t.strictEqual(err.error, 'Server Error');
+        done();
+      });
+  });
+
   it('should still work with callbacks', function (done) {
     request({url: 'http://www.filltext.com/?rows=1'}, function requestCallback(err, response, body) {
       t.strictEqual(response.statusCode, 200);
@@ -108,10 +143,6 @@ describe('Promises support', function () {
         promiseFactory: promiseFactoryFn // custom promise factory function
       })
       .then(function (body) {
-        if (throwError) {
-          throw body; // To simulate an error in the request
-        }
-
         t.isString(body);
         var data = JSON.parse(body);
         t.isArray(data);
@@ -133,7 +164,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -151,7 +183,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -174,7 +207,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .fail(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
@@ -194,7 +228,8 @@ describe('Promises support', function () {
       it('should work on request fail', function (done) {
         makeRequest(customPromiseFactory, done, true)
           .catch(function (err) {
-            t.strictEqual(err, 'Internal Server Error');
+            t.strictEqual(err.statusCode, 500);
+            t.strictEqual(err.error, 'Internal Server Error');
             done();
           });
       });
