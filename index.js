@@ -7,6 +7,7 @@
  * MIT Licensed
  *
  */
+var debug = require('debug')('requestretry');
 var extend = require('extend');
 var when = require('when');
 var request = require('request');
@@ -127,7 +128,12 @@ Request.prototype._tryUntilFail = function () {
     }
 
     if (err) {
+      debug(err);
       err.attempts = this.attempts;
+    }
+
+    if (this.retryStrategy(err, response, body) && body) {
+      debug(body);
     }
 
     if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
