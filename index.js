@@ -133,7 +133,13 @@ Request.prototype._tryUntilFail = function () {
     }
 
     if (this.retryStrategy(err, response, body) && body) {
-      debug(body);
+      let debugBody;
+      try {
+        debugBody = JSON.stringify(body);
+      } catch (e) {
+        debugBody = body;
+      }
+      debug(debugBody);
     }
 
     if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
