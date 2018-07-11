@@ -44,8 +44,10 @@
   "dependencies": {
     "extend": "^3.0.0",
     "lodash": "^4.15.0",
-    "request": "^2.74.0",
     "when": "^3.7.7"
+  },
+  "peerDependencies": {
+    "request": "~2.87.0"
   },
   "devDependencies": {
     "bluebird": "^3.4.6",
