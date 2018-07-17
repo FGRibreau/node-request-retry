@@ -166,7 +166,7 @@ Request.prototype.abort = function () {
 
 function Factory(url, options, f) {
   var retryConfig = _.chain(_.isObject(url) ? url : options || {}).defaults(DEFAULTS).pick(Object.keys(DEFAULTS)).value();
-  var req = new Request(url, options, f, retryConfig);
+  var req = new Factory.Request(url, options, f, retryConfig);
   req._tryUntilFail();
   return req;
 }
