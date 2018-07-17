@@ -1,3 +1,13 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2018-07-17)
+
+* BREAKING CHANGE: moving `request` dependency as a peerDependency. If you don't have request already  ([128030e](https://github.com/FGRibreau/node-request-retry/commit/128030e))
+* make request a peer dependency ([aafafe3](https://github.com/FGRibreau/node-request-retry/commit/aafafe3))
+* Release v2.0.0. ([e3f05f5](https://github.com/FGRibreau/node-request-retry/commit/e3f05f5))
+* docs(changelog): updated ([54a604a](https://github.com/FGRibreau/node-request-retry/commit/54a604a))
+
+
+
 <a name="1.13.0"></a>
 # 1.13.0 (2018-01-18)
 
