@@ -182,6 +182,20 @@ request({
 });
 ```
 
+## How to extend the default request
+
+```javascript
+request.Request = class extends request.Request {
+  constructor(url, options, f, retryConfig) {
+    super(url, options, f, retryConfig);
+    // this constructor will be called for every requestretry call,
+    // and give you global logging
+    console.log('Request', url, options, f, retryConfig);
+  }
+}
+```
+
+
 ## Modifying `request` options
 
 You can use the `defaults` method to provide default options like so:
