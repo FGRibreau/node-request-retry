@@ -1,3 +1,16 @@
+<a name="2.0.1"></a>
+## 2.0.1 (2018-08-01)
+
+* add a readme section ([3397bd6](https://github.com/FGRibreau/node-request-retry/commit/3397bd6))
+* add ability to override request object ([93851fb](https://github.com/FGRibreau/node-request-retry/commit/93851fb))
+* Release v2.0.1. ([4b0a236](https://github.com/FGRibreau/node-request-retry/commit/4b0a236))
+* Update README.md ([9e54d89](https://github.com/FGRibreau/node-request-retry/commit/9e54d89))
+* Update README.md ([c26a18c](https://github.com/FGRibreau/node-request-retry/commit/c26a18c))
+* chore: add npm-release ([355ee09](https://github.com/FGRibreau/node-request-retry/commit/355ee09))
+* docs(changelog): updated ([74925d6](https://github.com/FGRibreau/node-request-retry/commit/74925d6))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-07-17)
 
