@@ -182,7 +182,16 @@ request({
 });
 ```
 
-## How to extend the default request
+## How to access the underlying request library
+
+You can access to the underlying `request` library thanks to `request.Request`:
+
+```javascript
+const request = require('requestretry');
+console.log(request.Request); // original request library
+```
+
+Thus, if needed, it's possible to monkey-patch or extend the underlying Request library:
 
 ```javascript
 request.Request = class extends request.Request {
