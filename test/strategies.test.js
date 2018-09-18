@@ -39,7 +39,7 @@ function checkHTTPErrors(strategy) {
     }), code + ' error is not recoverable');
   });
 
-  [500, 599].forEach(function (code) {
+  [429, 500, 599].forEach(function (code) {
     t.ok(strategy(null, {
       statusCode: code
     }), code + ' error is recoverable');
