@@ -1,3 +1,12 @@
+<a name="3.0.0"></a>
+## 3.0.0 (2018-09-21)
+
+* Also retry on HTTP Status 429 "Too Many Requests" ([bf447d7](https://github.com/FGRibreau/node-request-retry/commit/bf447d7))
+* Release v3.0.0. ([9a16328](https://github.com/FGRibreau/node-request-retry/commit/9a16328))
+* docs(changelog): updated ([65e5a68](https://github.com/FGRibreau/node-request-retry/commit/65e5a68))
+
+
+
 <a name="2.0.2"></a>
 ## <small>2.0.2 (2018-08-01)</small>
 
