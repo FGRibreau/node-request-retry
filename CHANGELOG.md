@@ -1,3 +1,12 @@
+<a name="3.0.1"></a>
+## <small>3.0.1 (2018-09-26)</small>
+
+* Fix minification error ([475ea26](https://github.com/FGRibreau/node-request-retry/commit/475ea26))
+* Release v3.0.1. ([43c5b79](https://github.com/FGRibreau/node-request-retry/commit/43c5b79))
+* docs(changelog): updated ([a812ea9](https://github.com/FGRibreau/node-request-retry/commit/a812ea9))
+
+
+
 <a name="3.0.0"></a>
 ## 3.0.0 (2018-09-21)
 
