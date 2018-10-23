@@ -1,3 +1,13 @@
+<a name="3.0.2"></a>
+## <small>3.0.2 (2018-10-23)</small>
+
+* Release v3.0.2. ([83be067](https://github.com/FGRibreau/node-request-retry/commit/83be067))
+* Update README.md ([f8d0972](https://github.com/FGRibreau/node-request-retry/commit/f8d0972))
+* fix: upgrade request peerDep. ([0f9d33c](https://github.com/FGRibreau/node-request-retry/commit/0f9d33c))
+* docs(changelog): updated ([e77598c](https://github.com/FGRibreau/node-request-retry/commit/e77598c))
+
+
+
 <a name="3.0.1"></a>
 ## <small>3.0.1 (2018-09-26)</small>
 
