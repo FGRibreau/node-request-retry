@@ -48,7 +48,7 @@
     "when": "^3.7.7"
   },
   "peerDependencies": {
-    "request": "~2.87.0"
+    "request": "2.*.*"
   },
   "devDependencies": {
     "bluebird": "^3.5.1",
