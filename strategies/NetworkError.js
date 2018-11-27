@@ -6,10 +6,10 @@ var _ = require('lodash');
 /**
  * @param  {Null | Object} err
  * @param  {Object} response
- * @return {Boolean} true if the request had a network error
+ * @return {Array} with first Boolean item, true if the request had a network error
  */
 function NetworkError(err /*, response*/ ) {
-  return err && _.includes(RETRIABLE_ERRORS, err.code);
+  return [err && _.includes(RETRIABLE_ERRORS, err.code)];
 }
 
 NetworkError.RETRIABLE_ERRORS = RETRIABLE_ERRORS;
