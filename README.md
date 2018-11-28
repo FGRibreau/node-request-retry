@@ -130,11 +130,10 @@ function myRetryStrategy(err, response, body, options){
  *                  options: {Object} new options for request
  */
 function myRetryStrategy(err, response, body, options){
+  options.url = 'new url'; //you can overwrite some attributes or create new object 
   return {
     mustRetry: err || response.statusCode === 502,
-    options: {
-      // change some options property here, like `url`, `json` etc...
-    }
+    options: options, //then it should be passed back, it will be used for new requests
   }
 }
 
