@@ -113,11 +113,29 @@ A retry strategy let you specify when request-retry should retry a request
  * @param  {Null | Object} err
  * @param  {Object} response
  * @param  {Object} body
+ * @param  {Object} options copy 
  * @return {Boolean} true if the request should be retried
  */
-function myRetryStrategy(err, response, body){
+function myRetryStrategy(err, response, body, options){
   // retry the request if we had an error or if the response was a 'Bad Gateway'
   return err || response.statusCode === 502;
+}
+
+/**
+ * @param  {Null | Object} err
+ * @param  {Object} response
+ * @param  {Object} body
+ * @param  {Object} options copy 
+ * @return {Object} mustRetry: {Boolean} true if the request should be retried
+ *                  options: {Object} new options for request
+ */
+function myRetryStrategy(err, response, body, options){
+  return {
+    mustRetry: err || response.statusCode === 502,
+    options: {
+      // change some options property here, like `url`, `json` etc...
+    }
+  }
 }
 
 request({

@@ -24,19 +24,46 @@ describe('RetryStrategies', function () {
     it('should overwrite `options` object if strategy returned it', function (done) {
       var strategy = function (err, response, body, options) {
         options.url = 'http://www.filltext.com/?rows=1&err=200'; //overwrite url to return 200
-        return [true, options];
+        return {
+          mustRetry: true,
+          options: options,
+        };
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
+        url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
         maxAttempts: 3,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
+        if(err) done(err);
+
         t.strictEqual(200, response.statusCode);
         done();
       });
     });
+
+    it('should not overwrite `options` object if strategy did not returned it', function (done) {
+      var strategy = function (err, response, body, options) {
+        options.url = 'http://www.filltext.com/?rows=1&err=200'; //overwrite url to return 200
+        //do not return `options`
+        return {
+          mustRetry: true,
+        };
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
+        maxAttempts: 3,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+
+        t.strictEqual(500, response.statusCode);
+        done();
+      });
+    })
   });
 });
 
@@ -44,13 +71,13 @@ function checkNetworkErrors(strategy, errorCodes) {
   errorCodes.forEach(function (errorCode) {
     var err = new Error();
     err.code = errorCode;
-    t.ok(strategy(err)[0], 'error code ' + errorCode + ' is recoverable');
+    t.ok(strategy(err), 'error code ' + errorCode + ' is recoverable');
   });
 
   ['hello', 'plop'].forEach(function (errorCode) {
     var err = new Error();
     err.code = errorCode;
-    t.ok(!strategy(err)[0], 'error code ' + errorCode + ' is not recoverable');
+    t.ok(!strategy(err), 'error code ' + errorCode + ' is not recoverable');
   });
 }
 
@@ -58,12 +85,12 @@ function checkHTTPErrors(strategy) {
   [400, 301, 600].forEach(function (code) {
     t.ok(!strategy(null, {
       statusCode: code
-    })[0], code + ' error is not recoverable');
+    }), code + ' error is not recoverable');
   });
 
   [429, 500, 599].forEach(function (code) {
     t.ok(strategy(null, {
       statusCode: code
-    })[0], code + ' error is recoverable');
+    }), code + ' error is recoverable');
   });
 }
