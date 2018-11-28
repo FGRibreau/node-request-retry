@@ -1,4 +1,14 @@
-<a name="3.0.2"></a>
+## 3.1.0 (2018-11-28)
+
+* Changed return type of `retryStrategy` to [mustRetry, options], overwrite `options` if strategy retu ([3080eb7](https://github.com/FGRibreau/node-request-retry/commit/3080eb7))
+* Release v3.1.0. ([c05651b](https://github.com/FGRibreau/node-request-retry/commit/c05651b))
+* RetryStrategy can return Bool or Object, changes are backward compatible. ([ac78e14](https://github.com/FGRibreau/node-request-retry/commit/ac78e14))
+* Updated Readme ([731c712](https://github.com/FGRibreau/node-request-retry/commit/731c712))
+* fix: upgrade devDeps ([77dd58b](https://github.com/FGRibreau/node-request-retry/commit/77dd58b))
+* docs(changelog): updated ([52e45de](https://github.com/FGRibreau/node-request-retry/commit/52e45de))
+
+
+
 ## <small>3.0.2 (2018-10-23)</small>
 
 * Release v3.0.2. ([83be067](https://github.com/FGRibreau/node-request-retry/commit/83be067))
@@ -8,7 +18,6 @@
 
 
 
-<a name="3.0.1"></a>
 ## <small>3.0.1 (2018-09-26)</small>
 
 * Fix minification error ([475ea26](https://github.com/FGRibreau/node-request-retry/commit/475ea26))
@@ -17,7 +26,6 @@
 
 
 
-<a name="3.0.0"></a>
 ## 3.0.0 (2018-09-21)
 
 * Also retry on HTTP Status 429 "Too Many Requests" ([bf447d7](https://github.com/FGRibreau/node-request-retry/commit/bf447d7))
@@ -26,7 +34,6 @@
 
 
 
-<a name="2.0.2"></a>
 ## <small>2.0.2 (2018-08-01)</small>
 
 * Release v2.0.2. ([a79fb0f](https://github.com/FGRibreau/node-request-retry/commit/a79fb0f))
@@ -35,7 +42,6 @@
 
 
 
-<a name="2.0.1"></a>
 ## <small>2.0.1 (2018-08-01)</small>
 
 * add a readme section ([3397bd6](https://github.com/FGRibreau/node-request-retry/commit/3397bd6))
@@ -48,7 +54,6 @@
 
 
 
-<a name="2.0.0"></a>
 ## 2.0.0 (2018-07-17)
 
 * BREAKING CHANGE: moving `request` dependency as a peerDependency. If you don't have request already  ([128030e](https://github.com/FGRibreau/node-request-retry/commit/128030e))
@@ -58,7 +63,6 @@
 
 
 
-<a name="1.13.0"></a>
 ## 1.13.0 (2018-01-18)
 
 * fix(logic) ([3c4751e](https://github.com/FGRibreau/node-request-retry/commit/3c4751e))
@@ -68,7 +72,6 @@
 
 
 
-<a name="1.12.3"></a>
 ## <small>1.12.3 (2018-01-18)</small>
 
 * Added testing for error object attempts reporting ([578870f](https://github.com/FGRibreau/node-request-retry/commit/578870f))
@@ -84,7 +87,6 @@
 
 
 
-<a name="1.12.2"></a>
 ## <small>1.12.2 (2017-08-01)</small>
 
 * Added .auth, .jar and .cookie implementations along with corresponding tests ([15afe79](https://github.com/FGRibreau/node-request-retry/commit/15afe79))
@@ -108,7 +110,6 @@
 
 
 
-<a name="1.12.0"></a>
 ## 1.12.0 (2016-09-07)
 
 * Add delay strategy ([ce99e46](https://github.com/FGRibreau/node-request-retry/commit/ce99e46))
@@ -122,7 +123,6 @@
 
 
 
-<a name="1.11.0"></a>
 ## 1.11.0 (2016-09-03)
 
 * fix(circle) ([e6c2160](https://github.com/FGRibreau/node-request-retry/commit/e6c2160))
@@ -134,7 +134,6 @@
 
 
 
-<a name="1.10.0"></a>
 ## 1.10.0 (2016-08-18)
 
 * Release v1.10.0. ([b1fbef5](https://github.com/FGRibreau/node-request-retry/commit/b1fbef5))
@@ -143,7 +142,6 @@
 
 
 
-<a name="1.9.1"></a>
 ## <small>1.9.1 (2016-07-29)</small>
 
 * fix(changelog) ([9715bd6](https://github.com/FGRibreau/node-request-retry/commit/9715bd6))
@@ -154,7 +152,6 @@
 
 
 
-<a name="1.9.0"></a>
 ## 1.9.0 (2016-06-22)
 
 * Add support for body-dependent retry strategies ([0f472f9](https://github.com/FGRibreau/node-request-retry/commit/0f472f9))
@@ -164,7 +161,6 @@
 
 
 
-<a name="1.8.0"></a>
 ## 1.8.0 (2016-05-11)
 
 * Release v1.8.0. ([6767b49](https://github.com/FGRibreau/node-request-retry/commit/6767b49))
@@ -172,7 +168,6 @@
 
 
 
-<a name="1.7.1"></a>
 ## <small>1.7.1 (2016-05-11)</small>
 
 * Add support for .get/.post/... helpers ([0cb9e61](https://github.com/FGRibreau/node-request-retry/commit/0cb9e61))
@@ -183,7 +178,6 @@
 
 
 
-<a name="1.7.0"></a>
 ## 1.7.0 (2016-05-06)
 
 * docs(changelog) ([f8e793f](https://github.com/FGRibreau/node-request-retry/commit/f8e793f))
@@ -197,7 +191,6 @@
 
 
 
-<a name="1.6.0"></a>
 ## 1.6.0 (2015-12-25)
 
 * Added bluebird and nock dependencies ([2062358](https://github.com/FGRibreau/node-request-retry/commit/2062358))
@@ -218,7 +211,6 @@
 
 
 
-<a name="1.5.0"></a>
 ## 1.5.0 (2015-09-24)
 
 * Actually add attempts test ([0db5402](https://github.com/FGRibreau/node-request-retry/commit/0db5402))
@@ -229,7 +221,6 @@
 
 
 
-<a name="1.4.1"></a>
 ## <small>1.4.1 (2015-09-21)</small>
 
 * docs(changelog) ([86ff058](https://github.com/FGRibreau/node-request-retry/commit/86ff058))
@@ -241,7 +232,6 @@
 
 
 
-<a name="1.4.0"></a>
 ## 1.4.0 (2015-07-16)
 
 * add EAI_AGAIN to the list of retriable network errors ([64b96ff](https://github.com/FGRibreau/node-request-retry/commit/64b96ff))
@@ -251,7 +241,6 @@
 
 
 
-<a name="1.3.1"></a>
 ## <small>1.3.1 (2015-05-06)</small>
 
 * Release v1.3.1. ([bef5dba](https://github.com/FGRibreau/node-request-retry/commit/bef5dba))
@@ -260,7 +249,6 @@
 
 
 
-<a name="1.3.0"></a>
 ## 1.3.0 (2015-05-06)
 
 * Release v1.3.0. ([07ac122](https://github.com/FGRibreau/node-request-retry/commit/07ac122))
@@ -268,7 +256,6 @@
 
 
 
-<a name="1.2.2"></a>
 ## <small>1.2.2 (2015-01-03)</small>
 
 * docs(readme) ([94cc707](https://github.com/FGRibreau/node-request-retry/commit/94cc707))
@@ -277,7 +264,6 @@
 
 
 
-<a name="1.2.1"></a>
 ## <small>1.2.1 (2014-11-10)</small>
 
 * add tags for versions ([1b9dddc](https://github.com/FGRibreau/node-request-retry/commit/1b9dddc))
@@ -290,7 +276,6 @@
 
 
 
-<a name="1.2.0"></a>
 ## 1.2.0 (2014-11-03)
 
 * add editorconfig & jshintrc ([835d06a](https://github.com/FGRibreau/node-request-retry/commit/835d06a))
@@ -303,7 +288,6 @@
 
 
 
-<a name="1.1.0"></a>
 ## 1.1.0 (2014-10-27)
 
 * add @juliendangers as contributor ([27206d8](https://github.com/FGRibreau/node-request-retry/commit/27206d8))
@@ -317,7 +301,6 @@
 
 
 
-<a name="1.0.4"></a>
 ## <small>1.0.4 (2014-09-30)</small>
 
 * EPIPE support ([547ac71](https://github.com/FGRibreau/node-request-retry/commit/547ac71))
@@ -325,7 +308,6 @@
 
 
 
-<a name="1.0.3"></a>
 ## <small>1.0.3 (2014-09-23)</small>
 
 * . ([370095e](https://github.com/FGRibreau/node-request-retry/commit/370095e))
