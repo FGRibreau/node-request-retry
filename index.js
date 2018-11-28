@@ -80,7 +80,7 @@ function Request(url, options, f, retryConfig) {
 
   /**
    * Return true if the request should be retried
-   * @type {Function} (err, response) -> Boolean
+   * @type {Function} (err, response, body, options) -> [Boolean, Object (optional)]
    */
   this.retryStrategy = _.isFunction(options.retryStrategy) ? options.retryStrategy : RetryStrategies.HTTPOrNetworkError;
 
@@ -130,7 +130,15 @@ Request.prototype._tryUntilFail = function () {
       err.attempts = this.attempts;
     }
 
-    if (this.retryStrategy(err, response, body) && this.maxAttempts > 0) {
+    var mustRetry = this.retryStrategy(err, response, body, _.cloneDeep(this.options));
+    if (_.isObject(mustRetry)) {
+      if (_.isObject(mustRetry.options)) {
+        this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
+      }
+      mustRetry = mustRetry.mustRetry;
+    }
+
+    if (mustRetry && this.maxAttempts > 0) {
       this._timeout = setTimeout(this._tryUntilFail.bind(this), this.delayStrategy.call(this, err, response, body));
       return;
     }

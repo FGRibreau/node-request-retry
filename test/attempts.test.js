@@ -38,6 +38,7 @@ describe('Request attempts', function () {
   });
 
   it('should call delay strategy 2 times after some retries', function (done) {
+    this.timeout(3000);
     var mockDelayStrategy = sinon.stub().returns(500);
     var startTime = process.hrtime();
     request({
