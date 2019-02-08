@@ -92,6 +92,42 @@ describe('Promises support', function () {
     });
   });
 
+  it('should resolve 2xx responses when running in simple mode', function (done) {
+    request({
+      url: 'http://www.filltext.com/?rows=1', // return 1 row of data
+      simple: true
+    })
+      .then(function (response) {
+        t.strictEqual(response.statusCode, 200);
+        t.strictEqual(response.attempts, 1);
+        done();
+      });
+  });
+
+  it('should reject 4xx errors when running in simple mode', function (done) {
+    request({
+      url: 'http://www.filltext.com/?rows=1&err=400', // return a 400 status
+      maxAttempts: 1,
+      simple: true
+    }).catch(function (err) {
+      t.strictEqual(err.statusCode, 400);
+      t.strictEqual(err.body, 'Bad Request');
+      done();
+    });
+  });
+
+  it('should reject 5xx errors when running in simple mode', function (done) {
+    request({
+      url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
+      maxAttempts: 1,
+      simple: true
+    }).catch(function (err) {
+      t.strictEqual(err.statusCode, 500);
+      t.strictEqual(err.body, 'Internal Server Error');
+      done();
+    });
+  });
+
   describe('Different libraries support', function () {
 
     function makeRequest(promiseFactoryFn, done, throwError) {

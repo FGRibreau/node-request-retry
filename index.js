@@ -109,8 +109,15 @@ function Request(url, options, f, retryConfig) {
       return this._reject(err);
     }
 
+    var statusCode = response.statusCode;
+
     // resolve with the full response or just the body
     response = this.fullResponse ? response : body;
+
+    if (this.options.simple && statusCode >= 300) {
+      return this._reject(response);
+    }
+
     this._resolve(response);
   };
 }
