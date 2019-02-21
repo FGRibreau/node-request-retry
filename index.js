@@ -131,7 +131,7 @@ Request.prototype._tryUntilFail = function () {
     }
 
     var mustRetry = this.retryStrategy(err, response, body, _.cloneDeep(this.options));
-    if (_.isObject(mustRetry)) {
+    if (_.isObject(mustRetry) && _.has(mustRetry, 'mustRetry')) {
       if (_.isObject(mustRetry.options)) {
         this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
       }

@@ -63,6 +63,82 @@ describe('RetryStrategies', function () {
         t.strictEqual(500, response.statusCode);
         done();
       });
+    });
+
+    it('should allow boolean true return value', function (done) {
+      var strategy = function (err, response, body) {
+        return true;
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1',
+        maxAttempts: 2,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+
+        t.strictEqual(2, this.attempts); // maxAttempts reached
+        done();
+      });
+    });
+
+    it('should allow boolean false return value', function (done) {
+      var strategy = function (err, response, body) {
+        return false;
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1',
+        maxAttempts: 2,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+
+        t.strictEqual(1, this.attempts); // maxAttempts NOT reached
+        done();
+      });
+    });
+
+    it('should allow mustRetry object with true return value', function (done) {
+      var strategy = function (err, response, body) {
+        return {
+          mustRetry: true,
+        };
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1',
+        maxAttempts: 2,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+
+        t.strictEqual(2, this.attempts); // maxAttempts reached
+        done();
+      });
+    });
+
+    it('should allow mustRetry object with false return value', function (done) {
+      var strategy = function (err, response, body) {
+        return {
+          mustRetry: false,
+        };
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1',
+        maxAttempts: 2,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+
+        t.strictEqual(1, this.attempts); // maxAttempts NOT reached
+        done();
+      });
     })
   });
 });

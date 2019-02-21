@@ -118,7 +118,7 @@ A retry strategy let you specify when request-retry should retry a request
  */
 function myRetryStrategy(err, response, body, options){
   // retry the request if we had an error or if the response was a 'Bad Gateway'
-  return err || response.statusCode === 502;
+  return !!err || response.statusCode === 502;
 }
 
 /**
@@ -132,7 +132,7 @@ function myRetryStrategy(err, response, body, options){
 function myRetryStrategy(err, response, body, options){
   options.url = 'new url'; //you can overwrite some attributes or create new object 
   return {
-    mustRetry: err || response.statusCode === 502,
+    mustRetry: !!err || response.statusCode === 502,
     options: options, //then it should be passed back, it will be used for new requests
   }
 }
