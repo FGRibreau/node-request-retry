@@ -122,6 +122,10 @@ Request.prototype._tryUntilFail = function () {
   this.attempts++;
 
   this._req = Request.request(this.options, function (err, response, body) {
+    if (this.options.onResponse) {
+      this.options.onResponse(this, err, response, body);
+    }
+
     if (response) {
       response.attempts = this.attempts;
     }

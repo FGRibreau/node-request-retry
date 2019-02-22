@@ -13,6 +13,23 @@ describe('Request attempts', function () {
     });
   });
 
+  it('should fire onResponse method for each attempt', function (done) {
+    request({
+      url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
+      maxAttempts: 3,
+      retryDelay: 100,
+      onResponse: (request, err, response, body) => {
+        request.onResponseCount = !request.onResponseCount ? 1 : request.onResponseCount + 1;
+        response.onResponseCount = request.onResponseCount;
+      }
+    }, function(err, response, body) {
+      if(err) done(err);
+      t.strictEqual(3, response.attempts);
+      t.strictEqual(3, response.onResponseCount);
+      done();
+    });
+  });
+
   it('should show 3 attempts after some retries', function (done) {
     request({
       url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
