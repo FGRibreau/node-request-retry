@@ -1,3 +1,11 @@
+## 4.0.0 (2019-03-14)
+
+* Ensure mustRetry object has mustRetry property in retryStrategy return value ([9a3dedf](https://github.com/FGRibreau/node-request-retry/commit/9a3dedf))
+* Release v4.0.0. ([0b3fab7](https://github.com/FGRibreau/node-request-retry/commit/0b3fab7))
+* docs(changelog): updated ([94e086e](https://github.com/FGRibreau/node-request-retry/commit/94e086e))
+
+
+
 ## 3.1.0 (2018-11-28)
 
 * Changed return type of `retryStrategy` to [mustRetry, options], overwrite `options` if strategy retu ([3080eb7](https://github.com/FGRibreau/node-request-retry/commit/3080eb7))
