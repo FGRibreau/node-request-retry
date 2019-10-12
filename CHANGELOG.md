@@ -1,3 +1,11 @@
+## <small>4.0.2 (2019-10-12)</small>
+
+* Release v4.0.2. ([a73a0ee](https://github.com/FGRibreau/node-request-retry/commit/a73a0ee))
+* fix(package): do not expose coverage & .nyc_output ([7d7ed22](https://github.com/FGRibreau/node-request-retry/commit/7d7ed22))
+* docs(changelog): updated ([d3d9881](https://github.com/FGRibreau/node-request-retry/commit/d3d9881))
+
+
+
 ## <small>4.0.1 (2019-10-12)</small>
 
 * Do not package the test directory ([be5f46e](https://github.com/FGRibreau/node-request-retry/commit/be5f46e))
