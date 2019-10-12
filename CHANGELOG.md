@@ -1,3 +1,13 @@
+## <small>4.0.1 (2019-10-12)</small>
+
+* Do not package the test directory ([be5f46e](https://github.com/FGRibreau/node-request-retry/commit/be5f46e))
+* fix ([88e95ad](https://github.com/FGRibreau/node-request-retry/commit/88e95ad))
+* Release v4.0.1. ([d4a3dfe](https://github.com/FGRibreau/node-request-retry/commit/d4a3dfe))
+* Update README.md ([0c6fb14](https://github.com/FGRibreau/node-request-retry/commit/0c6fb14))
+* docs(changelog): updated ([d648a74](https://github.com/FGRibreau/node-request-retry/commit/d648a74))
+
+
+
 ## 4.0.0 (2019-03-14)
 
 * Ensure mustRetry object has mustRetry property in retryStrategy return value ([9a3dedf](https://github.com/FGRibreau/node-request-retry/commit/9a3dedf))
@@ -204,8 +214,8 @@
 * Added bluebird and nock dependencies ([2062358](https://github.com/FGRibreau/node-request-retry/commit/2062358))
 * Added tests for `promiseFactory` option, using (when.js, Q, kew, RSVP.js) promises libraries ([2cd5c6a](https://github.com/FGRibreau/node-request-retry/commit/2cd5c6a))
 * docs(changelog) ([55efd7d](https://github.com/FGRibreau/node-request-retry/commit/55efd7d))
-* docs(readme) ([41e893b](https://github.com/FGRibreau/node-request-retry/commit/41e893b))
 * docs(readme) ([d291e9b](https://github.com/FGRibreau/node-request-retry/commit/d291e9b))
+* docs(readme) ([41e893b](https://github.com/FGRibreau/node-request-retry/commit/41e893b))
 * fix(index) ([51d087c](https://github.com/FGRibreau/node-request-retry/commit/51d087c))
 * Fixed typo ([f24205d](https://github.com/FGRibreau/node-request-retry/commit/f24205d))
 * Implemented `promiseFactory` option, to allow usage of different promise libraries ([7a5e11c](https://github.com/FGRibreau/node-request-retry/commit/7a5e11c))
