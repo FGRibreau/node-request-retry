@@ -137,6 +137,24 @@ function myRetryStrategy(err, response, body, options){
   }
 }
 
+/**
+ * With an asynchronous retry strategy
+ * @param  {Null | Object} err
+ * @param  {Object} response
+ * @param  {Object} body
+ * @param  {Object} options copy 
+ * @return {Object} mustRetry: {Boolean} true if the request should be retried
+ *                  options: {Object} new options for request
+ */
+async function myRetryStrategy(err, response, body, options){
+  let token = await getNewApiAuthToken();
+  options.headers = {'Authorization': `Bearer ${token}`}
+  return {
+    mustRetry: true,
+    options: options, // retry with new auth token
+  }
+}
+
 request({
   url: 'https://api.domain.com/v1/a/b'
   json:true,

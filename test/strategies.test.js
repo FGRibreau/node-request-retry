@@ -140,6 +140,25 @@ describe('RetryStrategies', function () {
         done();
       });
     })
+
+    it('should work with an async strategy', function (done) {
+      var strategy = function (err, response, body) {
+        return new Promise(function(resolve, reject) {
+          setTimeout(function () {resolve({mustRetry: false})}, 500);
+        });
+      };
+
+      request({
+        url: 'http://www.filltext.com/?rows=1',
+        maxAttempts: 2,
+        retryDelay: 100,
+        retryStrategy: strategy
+      }, function(err, response, body) {
+        if(err) done(err);
+        t.strictEqual(1, this.attempts); // maxAttempts NOT reached
+        done();
+      });
+    });
   });
 });
 
