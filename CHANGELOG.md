@@ -1,3 +1,11 @@
+## 4.1.0 (2020-01-10)
+
+* async retry strategy ([4f6d0e8](https://github.com/FGRibreau/node-request-retry/commit/4f6d0e8))
+* Release v4.1.0. ([318435c](https://github.com/FGRibreau/node-request-retry/commit/318435c))
+* docs(changelog): updated ([01fa712](https://github.com/FGRibreau/node-request-retry/commit/01fa712))
+
+
+
 ## <small>4.0.2 (2019-10-12)</small>
 
 * Release v4.0.2. ([a73a0ee](https://github.com/FGRibreau/node-request-retry/commit/a73a0ee))
