@@ -121,7 +121,7 @@ Request.prototype._tryUntilFail = function () {
   this.maxAttempts--;
   this.attempts++;
 
-  this._req = Request.request(this.options, function (err, response, body) {
+  this._req = Request.request(this.options, async function (err, response, body) {
     if (response) {
       response.attempts = this.attempts;
     }
@@ -130,7 +130,7 @@ Request.prototype._tryUntilFail = function () {
       err.attempts = this.attempts;
     }
 
-    var mustRetry = this.retryStrategy(err, response, body, _.cloneDeep(this.options));
+    var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, _.cloneDeep(this.options)));
     if (_.isObject(mustRetry) && _.has(mustRetry, 'mustRetry')) {
       if (_.isObject(mustRetry.options)) {
         this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
