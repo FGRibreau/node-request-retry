@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "extend": "^3.0.2",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.15",
     "when": "^3.7.7"
   },
   "peerDependencies": {
