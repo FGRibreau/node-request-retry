@@ -1,3 +1,11 @@
+## <small>4.1.1 (2020-05-18)</small>
+
+* bumping up lodash version ([e8475bb](https://github.com/FGRibreau/node-request-retry/commit/e8475bb))
+* Release v4.1.1. ([1bc2d15](https://github.com/FGRibreau/node-request-retry/commit/1bc2d15))
+* docs(changelog): updated ([932af75](https://github.com/FGRibreau/node-request-retry/commit/932af75))
+
+
+
 ## 4.1.0 (2020-01-10)
 
 * async retry strategy ([4f6d0e8](https://github.com/FGRibreau/node-request-retry/commit/4f6d0e8))
