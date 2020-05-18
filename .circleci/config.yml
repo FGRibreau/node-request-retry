@@ -1,0 +1,11 @@
+version: 2.1 # using 2.1 provides access to orbs and other features
+jobs:
+  build:
+    environment:
+      COVERALLS_SERVICE_NAME: circleci
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run: npm run test
+      - run: npm run test-coverage && npm run send-coverage
