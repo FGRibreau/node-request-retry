@@ -130,10 +130,12 @@ Request.prototype._tryUntilFail = function () {
       err.attempts = this.attempts;
     }
 
+    const originalAgent = this.options.agent;
     var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, _.cloneDeep(this.options)));
     if (_.isObject(mustRetry) && _.has(mustRetry, 'mustRetry')) {
       if (_.isObject(mustRetry.options)) {
         this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
+        this.options.agent = originalAgent;
       }
       mustRetry = mustRetry.mustRetry;
     }
