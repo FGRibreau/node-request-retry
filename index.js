@@ -131,11 +131,16 @@ Request.prototype._tryUntilFail = function () {
     }
 
     const originalAgent = this.options.agent;
-    var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, _.cloneDeep(this.options)));
+    delete this.options.agent;
+    const clonedOptions = _.cloneDeep(this.options);
+    this.options.agent = originalAgent;
+    var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, clonedOptions));
     if (_.isObject(mustRetry) && _.has(mustRetry, 'mustRetry')) {
       if (_.isObject(mustRetry.options)) {
         this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
-        this.options.agent = originalAgent;
+        if (originalAgent && typeof this.options.agent === 'undefined') {
+          this.options.agent = originalAgent;
+        }
       }
       mustRetry = mustRetry.mustRetry;
     }
