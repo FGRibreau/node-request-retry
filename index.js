@@ -28,10 +28,8 @@ function defaultPromiseFactory(resolver) {
 function _cloneOptions(options) {
   const cloned = {};
   for (let key in options) {
-    if (key === 'agent') {
-      cloned[key] = options[key];
-    } else {
-      cloned[key] = _.cloneDeep(options[key]);
+    if (options.hasOwnProperty(key)) {
+      cloned[key] = key === 'agent' ? options[key] : _.cloneDeep(options[key]);
     }
   }
   return cloned;
