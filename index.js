@@ -25,6 +25,18 @@ function defaultPromiseFactory(resolver) {
   return when.promise(resolver);
 }
 
+function _cloneOptions(options) {
+  const cloned = {};
+  for (let key in options) {
+    if (key === 'agent') {
+      cloned[key] = options[key];
+    } else {
+      cloned[key] = _.cloneDeep(options[key]);
+    }
+  }
+  return cloned;
+}
+
 /**
  * It calls the promiseFactory function passing it the resolver for the promise
  *
@@ -130,17 +142,10 @@ Request.prototype._tryUntilFail = function () {
       err.attempts = this.attempts;
     }
 
-    const originalAgent = this.options.agent;
-    delete this.options.agent;
-    const clonedOptions = _.cloneDeep(this.options);
-    this.options.agent = originalAgent;
-    var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, clonedOptions));
+    var mustRetry = await Promise.resolve(this.retryStrategy(err, response, body, _cloneOptions(this.options)));
     if (_.isObject(mustRetry) && _.has(mustRetry, 'mustRetry')) {
       if (_.isObject(mustRetry.options)) {
         this.options = mustRetry.options; //if retryStrategy supposes different request options for retry
-        if (originalAgent && typeof this.options.agent === 'undefined') {
-          this.options.agent = originalAgent;
-        }
       }
       mustRetry = mustRetry.mustRetry;
     }
