@@ -1,7 +1,6 @@
 'use strict';
 
 var request = require('../');
-const http = require('http');
 var t = require('chai').assert;
 
 describe('RetryStrategies', function () {
@@ -40,38 +39,6 @@ describe('RetryStrategies', function () {
         if(err) done(err);
 
         t.strictEqual(200, response.statusCode);
-        done();
-      });
-    });
-
-    it('should not clone `options.agent`', function (done) {
-      const agent = new http.Agent({ keepAlive: true });
-      const cloneable = { a: true };
-      var strategy = function (err, response, body, options) {
-        options.url = 'http://www.filltext.com/?rows=1&err=200'; //overwrite url to return 200
-        t.strictEqual(agent, options.agent);
-        t.deepEqual(cloneable, options.cloneable);
-        t.notEqual(cloneable, options.cloneable);
-        return {
-          mustRetry: true,
-          options: options,
-        };
-      };
-
-      request({
-        url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
-        maxAttempts: 3,
-        agent: agent,
-        retryDelay: 100,
-        cloneable: cloneable,
-        retryStrategy: strategy
-      }, function(err, response, body) {
-        if(err) done(err);
-
-        t.strictEqual(200, response.statusCode);
-        t.strictEqual(agent, this.options.agent);
-        t.deepEqual(cloneable, this.options.cloneable);
-        t.notEqual(cloneable, this.options.cloneable);
         done();
       });
     });
