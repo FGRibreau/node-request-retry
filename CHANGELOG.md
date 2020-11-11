@@ -1,3 +1,17 @@
+## <small>4.1.2 (2020-11-11)</small>
+
+* fix ([d98bb73](https://github.com/FGRibreau/node-request-retry/commit/d98bb73))
+* Not use rewire for internal/private clone function ([f8cac13](https://github.com/FGRibreau/node-request-retry/commit/f8cac13))
+* Release v4.1.2. ([6550c2a](https://github.com/FGRibreau/node-request-retry/commit/6550c2a))
+* Update index.js ([f76272e](https://github.com/FGRibreau/node-request-retry/commit/f76272e))
+* Update index.js ([7e157f4](https://github.com/FGRibreau/node-request-retry/commit/7e157f4))
+* Update index.js ([a237f20](https://github.com/FGRibreau/node-request-retry/commit/a237f20))
+* Update index.js ([8c85f72](https://github.com/FGRibreau/node-request-retry/commit/8c85f72))
+* Update README.md ([a6e72dd](https://github.com/FGRibreau/node-request-retry/commit/a6e72dd))
+* docs(changelog): updated ([06c8557](https://github.com/FGRibreau/node-request-retry/commit/06c8557))
+
+
+
 ## <small>4.1.1 (2020-05-18)</small>
 
 * bumping up lodash version ([e8475bb](https://github.com/FGRibreau/node-request-retry/commit/e8475bb))
