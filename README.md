@@ -15,7 +15,7 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 
 > ## ❤️ Shameless plug
 > - [**Charts, simple as a URL**. No more server-side rendering pain, 1 url = 1 chart](https://image-charts.com)
-> - [Looking for a free **Redis GUI**?](http://redsmin.com) [Or for **real-time alerting** & monitoring for Redis?](http://redsmin.com)
+> - [Managed **Keycloak IAM** ? Try Cloud-IAM](https://www.cloud-iam.com/)
 > - [**Mailpopin**](https://mailpop.in/) - **Stripe** payment emails you can actually use
 
 ## Installation
