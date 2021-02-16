@@ -1,3 +1,13 @@
+## 5.0.0 (2021-02-16)
+
+* Create FUNDING.yml ([8d9e398](https://github.com/FGRibreau/node-request-retry/commit/8d9e398))
+* Hanlde EBUSY error from DNS resolver ([dd80892](https://github.com/FGRibreau/node-request-retry/commit/dd80892)), closes [#128](https://github.com/FGRibreau/node-request-retry/issues/128)
+* Release v5.0.0. ([7b53cff](https://github.com/FGRibreau/node-request-retry/commit/7b53cff))
+* Update README.md ([8d7ca0d](https://github.com/FGRibreau/node-request-retry/commit/8d7ca0d))
+* docs(changelog): updated ([aa9c2ea](https://github.com/FGRibreau/node-request-retry/commit/aa9c2ea))
+
+
+
 ## <small>4.1.2 (2020-11-11)</small>
 
 * fix ([d98bb73](https://github.com/FGRibreau/node-request-retry/commit/d98bb73))
