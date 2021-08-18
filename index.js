@@ -8,7 +8,6 @@
  *
  */
 var extend = require('extend');
-var when = require('when');
 var request = require('request');
 var RetryStrategies = require('./strategies');
 var _ = require('lodash');
@@ -22,7 +21,7 @@ var DEFAULTS = {
 
 // Default promise factory which use bluebird
 function defaultPromiseFactory(resolver) {
-  return when.promise(resolver);
+  return new Promise(resolver);
 }
 
 function _cloneOptions(options) {
