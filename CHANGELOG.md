@@ -1,3 +1,11 @@
+## 6.0.0 (2021-08-24)
+
+* Release v6.0.0. ([1b8ea5c](https://github.com/FGRibreau/node-request-retry/commit/1b8ea5c))
+* fix: remove dependency on when in favor of native Promises ([52d0603](https://github.com/FGRibreau/node-request-retry/commit/52d0603))
+* docs(changelog): updated ([a1189ef](https://github.com/FGRibreau/node-request-retry/commit/a1189ef))
+
+
+
 ## 5.0.0 (2021-02-16)
 
 * Create FUNDING.yml ([8d9e398](https://github.com/FGRibreau/node-request-retry/commit/8d9e398))
