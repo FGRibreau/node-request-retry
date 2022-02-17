@@ -11,8 +11,6 @@ var extend = require('extend');
 var request = require('request');
 var RetryStrategies = require('./strategies');
 var _ = require('lodash');
-var url = require('url');
-var querystring = require("querystring");
 
 var DEFAULTS = {
   maxAttempts: 5, // try 5 times
@@ -24,42 +22,6 @@ var DEFAULTS = {
 // Default promise factory which use bluebird
 function defaultPromiseFactory(resolver) {
   return new Promise(resolver);
-}
-
-// Prevent Cookie & Authorization Headers from being forwarded 
-// when the URL redirects to another domain (information leak) #137 
-function sanitizeHeaders(options) {
-  
-  const HEADERS_TO_IGNORE = ["cookie", "authorization"];
-
-  const urlObject = url.parse(options.url)
-  const queryObject = querystring.parse(urlObject.query);
-  
-  const hasExternalLink = Object.keys(queryObject).reduce(function(acc, cur) {
-    
-    let qUrl = url.parse(queryObject[cur]);
-
-    // external link if protocol || host || port is different
-    if(!!qUrl.host && (qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) ) {
-      acc = true;
-    }
-    
-    return acc;
-
-  }, false);
-
-  if (hasExternalLink && options.hasOwnProperty("headers") && typeof(options.headers) === "object") {
-    
-    // if External Link: remove Cookie and Authorization from Headers
-    Object.keys(options.headers).filter(function(key) {
-      return HEADERS_TO_IGNORE.includes(key.toLowerCase())
-    }).map(function(key) {
-      return delete options.headers[key]
-    });
-
-  }
-
-  return options;
 }
 
 function _cloneOptions(options) {
@@ -123,7 +85,7 @@ function Request(url, options, f, retryConfig) {
    * Option object
    * @type {Object}
    */
-  this.options = sanitizeHeaders(options);
+  this.options = options;
 
   /**
    * Return true if the request should be retried
