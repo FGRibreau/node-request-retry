@@ -26,35 +26,28 @@ function defaultPromiseFactory(resolver) {
   return new Promise(resolver);
 }
 
-// Prevent Cookie & Authorization Headers from being forwarded 
-// when the URL redirects to another domain (information leak) #137 
+// Prevent Cookie & Authorization Headers from being forwarded
+// when the URL redirects to another domain (information leak) #137
 function sanitizeHeaders(options) {
-  
   const HEADERS_TO_IGNORE = ["cookie", "authorization"];
 
-  const urlObject = url.parse(options.url)
+  const urlObject = url.parse(options.url || options.uri);
   const queryObject = querystring.parse(urlObject.query);
-  
-  const hasExternalLink = Object.keys(queryObject).reduce(function(acc, cur) {
-    
-    let qUrl = url.parse(queryObject[cur]);
+
+  const hasExternalLink = Object.keys(queryObject).some(function (queryParam) {
+    const qUrl = url.parse(queryObject[queryParam]);
 
     // external link if protocol || host || port is different
-    if(!!qUrl.host && (qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) ) {
-      acc = true;
-    }
-    
-    return acc;
+    return !!qUrl.host && (qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port);
+  });
 
-  }, false);
+  if (hasExternalLink && options.hasOwnProperty("headers") && typeof (options.headers) === "object") {
 
-  if (hasExternalLink && options.hasOwnProperty("headers") && typeof(options.headers) === "object") {
-    
     // if External Link: remove Cookie and Authorization from Headers
-    Object.keys(options.headers).filter(function(key) {
-      return HEADERS_TO_IGNORE.includes(key.toLowerCase())
-    }).map(function(key) {
-      return delete options.headers[key]
+    Object.keys(options.headers).filter(function (key) {
+      return HEADERS_TO_IGNORE.includes(key.toLowerCase());
+    }).map(function (key) {
+      return delete options.headers[key];
     });
 
   }
@@ -93,13 +86,13 @@ function makePromise(requestInstance, promiseFactoryFn) {
 
 function Request(url, options, f, retryConfig) {
   // ('url')
-  if(_.isString(url)){
+  if (_.isString(url)) {
     // ('url', f)
-    if(_.isFunction(options)){
+    if (_.isFunction(options)) {
       f = options;
     }
 
-    if(!_.isObject(options)){
+    if (!_.isObject(options)) {
       options = {};
     }
 
@@ -107,8 +100,8 @@ function Request(url, options, f, retryConfig) {
     options.url = url;
   }
 
-  if(_.isObject(url)){
-    if(_.isFunction(options)){
+  if (_.isObject(url)) {
+    if (_.isFunction(options)) {
       f = options;
     }
     options = url;
@@ -123,7 +116,8 @@ function Request(url, options, f, retryConfig) {
    * Option object
    * @type {Object}
    */
-  this.options = sanitizeHeaders(options);
+  // this.options = sanitizeHeaders(options);
+  this.options = options;
 
   /**
    * Return true if the request should be retried
@@ -135,7 +129,9 @@ function Request(url, options, f, retryConfig) {
    * Return a number representing how long request-retry should wait before trying again the request
    * @type {Boolean} (err, response, body) -> Number
    */
-  this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function() { return this.retryDelay; };
+  this.delayStrategy = _.isFunction(options.delayStrategy) ? options.delayStrategy : function () {
+    return this.retryDelay;
+  };
 
   this._timeout = null;
   this._req = null;
@@ -204,14 +200,14 @@ Request.prototype.abort = function () {
 
 // expose request methods from RequestRetry
 ['end', 'on', 'emit', 'once', 'setMaxListeners', 'start', 'removeListener', 'pipe', 'write', 'auth'].forEach(function (requestMethod) {
-  Request.prototype[requestMethod] = function exposedRequestMethod () {
+  Request.prototype[requestMethod] = function exposedRequestMethod() {
     return this._req[requestMethod].apply(this._req, arguments);
   };
 });
 
 // expose promise methods
 ['then', 'catch', 'finally', 'fail', 'done'].forEach(function (promiseMethod) {
-  Request.prototype[promiseMethod] = function exposedPromiseMethod () {
+  Request.prototype[promiseMethod] = function exposedPromiseMethod() {
     if (this._callback) {
       throw new Error('A callback was provided but waiting a promise, use only one pattern');
     }
@@ -230,13 +226,13 @@ function Factory(url, options, f) {
 function makeHelper(obj, verb) {
   obj[verb] = function helper(url, options, f) {
     // ('url')
-    if(_.isString(url)){
+    if (_.isString(url)) {
       // ('url', f)
-      if(_.isFunction(options)){
+      if (_.isFunction(options)) {
         f = options;
       }
 
-      if(!_.isObject(options)){
+      if (!_.isObject(options)) {
         options = {};
       }
 
@@ -244,8 +240,8 @@ function makeHelper(obj, verb) {
       options.url = url;
     }
 
-    if(_.isObject(url)){
-      if(_.isFunction(options)){
+    if (_.isObject(url)) {
+      if (_.isFunction(options)) {
         f = options;
       }
       options = url;
@@ -259,13 +255,13 @@ function makeHelper(obj, verb) {
 function defaults(defaultOptions, defaultF) {
   var factory = function (options, f) {
     if (typeof options === "string") {
-      options = { uri: options };
+      options = {uri: options};
     }
-    return Factory.apply(null, [ extend(true, {}, defaultOptions, options), f || defaultF ]);
+    return Factory.apply(null, [extend(true, {}, defaultOptions, options), f || defaultF]);
   };
 
   factory.defaults = function (newDefaultOptions, newDefaultF) {
-    return defaults.apply(null, [ extend(true, {}, defaultOptions, newDefaultOptions), newDefaultF || defaultF ]);
+    return defaults.apply(null, [extend(true, {}, defaultOptions, newDefaultOptions), newDefaultF || defaultF]);
   };
 
   factory.Request = Request;
