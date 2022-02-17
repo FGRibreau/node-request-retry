@@ -116,8 +116,7 @@ function Request(url, options, f, retryConfig) {
    * Option object
    * @type {Object}
    */
-  // this.options = sanitizeHeaders(options);
-  this.options = options;
+  this.options = sanitizeHeaders(options);
 
   /**
    * Return true if the request should be retried
