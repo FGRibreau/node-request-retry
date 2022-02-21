@@ -1,3 +1,19 @@
+## 7.0.0 (2022-02-21)
+
+* changes ([2d822ad](https://github.com/FGRibreau/node-request-retry/commit/2d822ad))
+* Prevent Cookie & Authorization Headers from being forwarded when the URL redirects to another domain ([0979c60](https://github.com/FGRibreau/node-request-retry/commit/0979c60)), closes [#137](https://github.com/FGRibreau/node-request-retry/issues/137)
+* Release v7.0.0. ([4569005](https://github.com/FGRibreau/node-request-retry/commit/4569005))
+* Update leak.test.js ([2768f5c](https://github.com/FGRibreau/node-request-retry/commit/2768f5c))
+* Update leak.test.js ([afa27ef](https://github.com/FGRibreau/node-request-retry/commit/afa27ef))
+* Update README.md ([5e1a63c](https://github.com/FGRibreau/node-request-retry/commit/5e1a63c))
+* Update README.md ([ebf3471](https://github.com/FGRibreau/node-request-retry/commit/ebf3471))
+* test: add more test ([c7c47d6](https://github.com/FGRibreau/node-request-retry/commit/c7c47d6))
+* fix: :facepalm: ([3c0d686](https://github.com/FGRibreau/node-request-retry/commit/3c0d686))
+* fix: breaking test suite ([95e7a3b](https://github.com/FGRibreau/node-request-retry/commit/95e7a3b))
+* docs(changelog): updated ([a450999](https://github.com/FGRibreau/node-request-retry/commit/a450999))
+
+
+
 ## 6.0.0 (2021-08-24)
 
 * Release v6.0.0. ([1b8ea5c](https://github.com/FGRibreau/node-request-retry/commit/1b8ea5c))
