@@ -14,7 +14,7 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 > ## ❤️ Shameless plug
 > - [**Charts, simple as a URL**. No more server-side rendering pain, 1 url = 1 chart](https://image-charts.com)
 > - [Managed **Keycloak IAM** ? Try Cloud-IAM](https://www.cloud-iam.com/)
-> - [**Mailpopin**](https://mailpop.in/) - **Stripe** payment emails you can actually use
+> - [Automate your second brain on RoamResearch with Zapier](https://roam-bot.com/)
 
 ## Installation
 
