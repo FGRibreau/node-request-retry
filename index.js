@@ -38,7 +38,7 @@ function sanitizeHeaders(options) {
     const qUrl = url.parse(queryObject[queryParam]);
 
     // external link if protocol || host || port is different
-    return !!qUrl.host && (qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port);
+    return (qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port);
   });
 
   if (hasExternalLink && options.hasOwnProperty("headers") && typeof (options.headers) === "object") {
