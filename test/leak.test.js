@@ -13,7 +13,8 @@ describe('Information Leak', function () {
                 'Content-Type': 'application/json',
                 'cookie': 'ajs_anonymous_id=1234567890',
                 'authorization': 'Bearer eyJhb12345abcdef'
-            }
+            },
+            json:true
         }, function (err, response, body) {
             t.strictEqual(Object.keys(body).length, 0);
             done();
@@ -30,7 +31,7 @@ describe('Information Leak', function () {
                 'authorization': 'Bearer eyJhb12345abcdef'
             }
         }, function (err, response, body) {
-            t.strictEqual(body, undefined);
+            t.strictEqual(body, '');
             done();
         });
     });
