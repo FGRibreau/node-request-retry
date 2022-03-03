@@ -4,3 +4,7 @@ npm-debug.log
 /test
 .nyc_output/
 coverage/
+.idea
+.checkbuild
+.circleci
+.github
