@@ -1,3 +1,12 @@
+## <small>7.0.1 (2022-03-03)</small>
+
+* changes ([c8a309a](https://github.com/FGRibreau/node-request-retry/commit/c8a309a))
+* Release v7.0.1. ([a778a8d](https://github.com/FGRibreau/node-request-retry/commit/a778a8d))
+* Update README.md ([8670e59](https://github.com/FGRibreau/node-request-retry/commit/8670e59))
+* docs(changelog): updated ([90a01f0](https://github.com/FGRibreau/node-request-retry/commit/90a01f0))
+
+
+
 ## 7.0.0 (2022-02-21)
 
 * changes ([2d822ad](https://github.com/FGRibreau/node-request-retry/commit/2d822ad))
