@@ -108,4 +108,23 @@ describe('Information Leak', function () {
     });
   });
 
+
+  it('should not fail when the request has query parameters in array format', function (done) {
+
+    request({
+      url: 'https://httpbingo.org/bearer?test=hello&test=world',
+      headers: {
+        'Content-Type': 'application/json',
+        'cookie': 'ajs_anonymous_id=1234567890',
+        'authorization': 'Bearer eyJhb12345abcdef'
+      }
+    }, function (err, response, body) {
+      t.deepEqual(body, {
+        "authenticated": true,
+        "token": "eyJhb12345abcdef"
+      });
+      done();
+    });
+  });
+
 });

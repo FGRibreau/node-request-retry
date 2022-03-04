@@ -35,10 +35,13 @@ function sanitizeHeaders(options) {
   const queryObject = querystring.parse(urlObject.query);
 
   const hasExternalLink = Object.keys(queryObject).some(function (queryParam) {
-    const qUrl = url.parse(queryObject[queryParam]);
+    const values = _.isArray(queryObject[queryParam]) ? queryObject[queryParam] : [queryObject[queryParam]]
+    return values.map(v => {
+      const qUrl = url.parse(v);
 
-    // external link if protocol || host || port is different
-    return (!!qUrl.host && ( qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) );
+      // external link if protocol || host || port is different
+      return (!!qUrl.host && ( qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) );
+    }).some(v => v === true)
   });
 
   if (hasExternalLink && options.hasOwnProperty("headers") && typeof (options.headers) === "object") {
@@ -74,7 +77,7 @@ function _cloneOptions(options) {
  */
 function makePromise(requestInstance, promiseFactoryFn) {
 
-  // Resolver function wich assigns the promise (resolve, reject) functions
+  // Resolver function which assigns the promise (resolve, reject) functions
   // to the requestInstance
   function Resolver(resolve, reject) {
     this._resolve = resolve;
