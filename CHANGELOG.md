@@ -1,3 +1,13 @@
+## <small>7.0.2 (2022-03-04)</small>
+
+* better syntax ([56e04b7](https://github.com/FGRibreau/node-request-retry/commit/56e04b7))
+* fixed bug when receiving array parameter ([89945eb](https://github.com/FGRibreau/node-request-retry/commit/89945eb))
+* Release v7.0.2. ([4e3fa9d](https://github.com/FGRibreau/node-request-retry/commit/4e3fa9d))
+* fix: do not publish to npm useless files ([93ae32b](https://github.com/FGRibreau/node-request-retry/commit/93ae32b))
+* docs(changelog): updated ([b22adc5](https://github.com/FGRibreau/node-request-retry/commit/b22adc5))
+
+
+
 ## <small>7.0.1 (2022-03-03)</small>
 
 * changes ([c8a309a](https://github.com/FGRibreau/node-request-retry/commit/c8a309a))
