@@ -36,13 +36,12 @@ function sanitizeHeaders(options) {
 
   const hasExternalLink = Object.keys(queryObject).some(function (queryParam) {
     const values = _.isArray(queryObject[queryParam]) ? queryObject[queryParam] : [queryObject[queryParam]]
-    const v = values.map(v => {
+    return values.map(v => {
       const qUrl = url.parse(v);
 
       // external link if protocol || host || port is different
       return (!!qUrl.host && ( qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) );
-    })
-    return v.some(v => v === true)
+    }).some(v => v === true)
   });
 
   if (hasExternalLink && options.hasOwnProperty("headers") && typeof (options.headers) === "object") {
