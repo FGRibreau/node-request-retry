@@ -18,7 +18,8 @@ var DEFAULTS = {
   maxAttempts: 5, // try 5 times
   retryDelay: 5000, // wait for 5s before trying again
   fullResponse: true, // resolve promise with the full response object
-  promiseFactory: defaultPromiseFactory // Function to use a different promise implementation library
+  promiseFactory: defaultPromiseFactory, // Function to use a different promise implementation library
+  skipHeaderSanitize: false // sanitize header by default
 };
 
 // Default promise factory which use bluebird
@@ -119,7 +120,7 @@ function Request(url, options, f, retryConfig) {
    * Option object
    * @type {Object}
    */
-  this.options = sanitizeHeaders(options);
+  this.options = retryConfig.skipHeaderSanitize ? options : sanitizeHeaders(options)
 
   /**
    * Return true if the request should be retried

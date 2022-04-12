@@ -126,5 +126,25 @@ describe('Information Leak', function () {
       done();
     });
   });
+  
+  
+  it('should forward authorization headers regardless if skipHeaderSanitize is set to true', function (done) {
+
+    request({
+      url: 'https://httpbingo.org/redirect-to?url=http://httpbingo.org/bearer',
+      headers: {
+        'Content-Type': 'application/json',
+        'cookie': 'ajs_anonymous_id=1234567890',
+        'authorization': 'Bearer eyJhb12345abcdef'
+      },
+      skipHeaderSanitize: true
+    }, function (err, response, body) {
+      t.deepEqual(body, {
+        "authenticated": true,
+        "token": "eyJhb12345abcdef"
+      });
+      done();
+    });
+  });
 
 });
