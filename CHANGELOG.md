@@ -1,3 +1,12 @@
+## 7.1.0 (2022-04-12)
+
+* add skipHeaderSanitize option ([a608d09](https://github.com/FGRibreau/node-request-retry/commit/a608d09))
+* add skipHeaderSanitize test ([08e181a](https://github.com/FGRibreau/node-request-retry/commit/08e181a))
+* Release v7.1.0. ([3be9409](https://github.com/FGRibreau/node-request-retry/commit/3be9409))
+* docs(changelog): updated ([e1c577b](https://github.com/FGRibreau/node-request-retry/commit/e1c577b))
+
+
+
 ## <small>7.0.2 (2022-03-04)</small>
 
 * better syntax ([56e04b7](https://github.com/FGRibreau/node-request-retry/commit/56e04b7))
