@@ -29,7 +29,7 @@
     "release-after-pr": "git pull --rebase && npm run test-coverage && npm-release patch",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "changelog-git": "npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): updated' && git push origin master",
-    "postpublish": "npm run --silent changelog-git"
+    "postpublish": "npm run --silent changelog-git || true"
   },
   "license": "MIT",
   "nyc": {
