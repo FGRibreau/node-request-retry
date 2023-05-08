@@ -38,10 +38,14 @@ function sanitizeHeaders(options) {
   const hasExternalLink = Object.keys(queryObject).some(function (queryParam) {
     const values = _.isArray(queryObject[queryParam]) ? queryObject[queryParam] : [queryObject[queryParam]]
     return values.map(v => {
-      const qUrl = url.parse(v);
+      try {
+        const qUrl = url.parse(v);
 
-      // external link if protocol || host || port is different
-      return (!!qUrl.host && ( qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) );
+        // external link if protocol || host || port is different
+        return (!!qUrl.host && ( qUrl.protocol !== urlObject.protocol || qUrl.host !== urlObject.host || qUrl.port !== urlObject.port) );
+      } catch (ex) {
+        return false;
+      }
     }).some(v => v === true)
   });
 
