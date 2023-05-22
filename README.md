@@ -12,6 +12,7 @@ When the connection fails with one of `ECONNRESET`, `ENOTFOUND`, `ESOCKETTIMEDOU
 
 
 > ## ❤️ Shameless plug
+> - Need to implement Webhooks inside your SaaS? [Try Hook0, an open-source self-hostable webhook micro-service](https://www.hook0.com/)
 > - [**Charts, simple as a URL**. No more server-side rendering pain, 1 url = 1 chart](https://image-charts.com)
 > - [Managed **Keycloak IAM** ? Try Cloud-IAM](https://www.cloud-iam.com/)
 > - [Automate your second brain on RoamResearch with Zapier](https://roam-bot.com/)
