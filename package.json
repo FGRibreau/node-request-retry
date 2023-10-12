@@ -1,7 +1,7 @@
 {
-  "name": "requestretry",
+  "name": "tiny-request-retry",
   "description": "request-retry wrap nodejs request to retry http(s) requests in case of error",
-  "version": "7.1.0",
+  "version": "1.0.0",
   "author": {
     "name": "Francois-Guillaume Ribreau",
     "email": "npm@fgribreau.com",
@@ -18,7 +18,7 @@
     }
   ],
   "repository": {
-    "url": "https://github.com/FGRibreau/node-request-retry"
+    "url": "https://github.com/adico1/tiny-request-retry"
   },
   "main": "index.js",
   "scripts": {
@@ -43,26 +43,26 @@
     ]
   },
   "dependencies": {
-    "extend": "^3.0.2",
-    "lodash": "^4.17.15"
+    "extend": "3.0.2",
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
-    "request": "2.*.*"
+    "tiny-request": "2.*.*"
   },
   "devDependencies": {
-    "bluebird": "^3.5.1",
-    "chai": "^4.2.0",
-    "conventional-changelog": "^2.0.1",
-    "conventional-changelog-cli": "^2.0.11",
-    "coveralls": "^2.13.1",
-    "kew": "~0.7.0",
-    "mocha": "^9.1.3",
-    "npm-release": "^1.0.0",
-    "nyc": "^15.1.0",
-    "q": "^1.5.1",
-    "request": "^2.88.0",
-    "rsvp": "^4.8.4",
-    "sinon": "^6.1.4",
-    "updtr": "^3.1.0"
+    "bluebird": "3.7.2",
+    "chai": "4.3.10",
+    "conventional-changelog": "5.1.0",
+    "conventional-changelog-cli": "4.1.0",
+    "coveralls": "3.1.1",
+    "kew": "0.7.0",
+    "mocha": "10.2.0",
+    "npm-release": "1.0.0",
+    "nyc": "15.1.0",
+    "q": "1.5.1",
+    "tiny-request": "2.0.0",
+    "rsvp": "4.8.5",
+    "sinon": "16.1.0",
+    "updtr": "4.0.0"
   }
 }
