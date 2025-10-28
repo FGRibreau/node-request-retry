@@ -6,7 +6,8 @@ var sinon = require('sinon');
 
 describe('Request attempts', function () {
   it('should show 1 attempt after a successful call', function (done) {
-    request.get('http://www.filltext.com/?rows=1', function (err, response, body) {
+    request.get('https://httpbin.org/json', function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 200);
       t.strictEqual(response.attempts, 1);
       done();
@@ -15,10 +16,11 @@ describe('Request attempts', function () {
 
   it('should show 3 attempts after some retries', function (done) {
     request({
-      url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
+      url: 'https://httpbin.org/status/500', // return a 500 status
       maxAttempts: 3,
       retryDelay: 100
     }, function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 500);
       t.strictEqual(response.attempts, 3);
       done();
@@ -38,15 +40,16 @@ describe('Request attempts', function () {
   });
 
   it('should call delay strategy 2 times after some retries', function (done) {
-    this.timeout(3000);
+    this.timeout(6000);
     var mockDelayStrategy = sinon.stub().returns(500);
     var startTime = process.hrtime();
     request({
-      url: 'http://www.filltext.com/?rows=1&err=500', // return a 500 status
+      url: 'https://httpbin.org/status/500', // return a 500 status
       maxAttempts: 3,
       retryDelay: 1000000, // Set to large delay to prove it will not be used
       delayStrategy: mockDelayStrategy
     }, function (err, response, body) {
+      if (err) return done(err);
       var endTime = process.hrtime(startTime); // process.hrtime returns an array [seconds, nanoseconds]
       var timeDiff = endTime[0] * 1000 + endTime[1]/1000000;
 

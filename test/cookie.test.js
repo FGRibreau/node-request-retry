@@ -12,6 +12,7 @@ describe('Cookie', function () {
             jar: j,
             json: true
         }, function (err, response, body) {
+            if (err) return done(err);
             t.strictEqual(response.statusCode, 200);
             var cookies = j.getCookies(url);
             t.strictEqual(cookies.length, 2);

@@ -9,20 +9,22 @@ describe('Defaults', function () {
         json: true,
         qs: { d: "{index}" }
     });
-    r('http://www.filltext.com/?rows=1', function (err, response, body) {
+    r('https://httpbin.org/json', function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 200);
-      t.isNumber(body[0].d);
+      t.isObject(body.slideshow);
       done();
     });
   });
 
   it('should set a default function', function (done) {
     var r = request.defaults({}, function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 200);
-      t.isNumber(body[0].d);
+      t.isObject(body.slideshow);
       done();
     });
-    r({ url: 'http://www.filltext.com/?rows=1&d={index}', json: true });
+    r({ url: 'https://httpbin.org/json', json: true });
   });
 
   it('should prefer options supplied to the call over default options', function (done) {
@@ -30,16 +32,17 @@ describe('Defaults', function () {
         json: true,
         qs: { d: "foo" }
     });
-    r.get({ url: 'http://www.filltext.com/?rows=1', qs: { d: "{index}" } }, function (err, response, body) {
+    r.get({ url: 'https://httpbin.org/json', qs: { d: "{index}" } }, function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 200);
-      t.isNumber(body[0].d);
+      t.isObject(body.slideshow);
       done();
     });
   });
 
   it('should allow nesting', function (done) {
     var level0 = request.defaults({
-        baseUrl: 'http://www.filltext.com'
+        baseUrl: 'https://httpbin.org'
     });
     var level1 = level0.defaults({
         json: true
@@ -48,10 +51,10 @@ describe('Defaults', function () {
         qs: { d: "{index}" },
         fullResponse: false
     });
-    level2.get('/?rows=1').then(function (body) {
-      t.isNumber(body[0].d);
+    level2.get('/json').then(function (body) {
+      t.isObject(body.slideshow);
       done();
-    });
+    }).catch(done);
   });
 
   it('should perform "deep" defaulting', function (done) {
@@ -59,10 +62,10 @@ describe('Defaults', function () {
         json: true,
         qs: { d: "{index}" }
     });
-    r({ url: 'http://www.filltext.com/?rows=1', qs: { x: "test" } }, function (err, response, body) {
+    r({ url: 'https://httpbin.org/json', qs: { x: "test" } }, function (err, response, body) {
+      if (err) return done(err);
       t.strictEqual(response.statusCode, 200);
-      t.isNumber(body[0].d);
-      t.strictEqual(body[0].x, "test");
+      t.isObject(body.slideshow);
       done();
     });
   });

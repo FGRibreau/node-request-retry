@@ -12,7 +12,7 @@ describe('Request', function () {
         set = true;
       }
     };
-    request('http://www.filltext.com/?rows=1', function (err, response, body) {
+    request('https://httpbin.org/json', function (err, response, body) {
       t.strictEqual(set, true);
       done();
     });
