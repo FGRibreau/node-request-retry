@@ -14,7 +14,7 @@ describe('Cookie', function () {
         }, function (err, response, body) {
             if (err) return done(err);
             t.strictEqual(response.statusCode, 200);
-            var cookies = j.getCookies(url);
+            var cookies = j.getCookiesSync(url);
             t.strictEqual(cookies.length, 2);
             t.strictEqual(cookies.filter(c => c.key === 'k1')[0].value, 'v1');
             t.strictEqual(cookies.filter(c => c.key === 'k2')[0].value, 'v2');
