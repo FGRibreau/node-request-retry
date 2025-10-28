@@ -62,7 +62,6 @@
     "postman-request": "^2.88.1-postman",
     "q": "^1.5.1",
     "rsvp": "^4.8.4",
-    "sinon": "^6.1.4",
-    "updtr": "^4.1.0"
+    "sinon": "^6.1.4"
   }
 }
