@@ -8,7 +8,7 @@ describe('Information Leak', function () {
   it('should not forward cookie headers when the request has a redirect from another protocol/domain/port', function (done) {
 
       request({
-          url: 'https://httpbingo.org/redirect-to?url=http://httpbingo.org/cookies',
+          url: 'https://httpbin.org/redirect-to?url=http://httpbin.org/cookies',
           headers: {
               'Content-Type': 'application/json',
               'cookie': 'ajs_anonymous_id=1234567890',
@@ -16,7 +16,7 @@ describe('Information Leak', function () {
           },
           json:true
       }, function (err, response, body) {
-          t.deepEqual(Object.keys(body).length, 0);
+          t.deepEqual(body.cookies || {}, {});
           done();
       });
   });
@@ -24,7 +24,7 @@ describe('Information Leak', function () {
   it('should forward cookie headers when the request has a redirect from the same protocol/domain/port', function (done) {
 
     request({
-      url: 'https://httpbingo.org/redirect-to?url=https://httpbingo.org/cookies',
+      url: 'https://httpbin.org/redirect-to?url=https://httpbin.org/cookies',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',
@@ -32,7 +32,7 @@ describe('Information Leak', function () {
       },
       json:true
     }, function (err, response, body) {
-      t.deepEqual(body, {
+      t.deepEqual(body.cookies || {}, {
         "ajs_anonymous_id": "1234567890"
       });
       done();
@@ -42,7 +42,7 @@ describe('Information Leak', function () {
   it('should forward cookie headers when the request hasn\'t any redirect', function (done) {
 
     request({
-      url: 'https://httpbingo.org/cookies?test=hello',
+      url: 'https://httpbin.org/cookies?test=hello',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',
@@ -50,7 +50,7 @@ describe('Information Leak', function () {
       },
       json:true
     }, function (err, response, body) {
-      t.deepEqual(body, {
+      t.deepEqual(body.cookies || {}, {
         "ajs_anonymous_id": "1234567890"
       });
       done();
@@ -60,7 +60,7 @@ describe('Information Leak', function () {
   it('should not forward authorization headers when the request has a redirect', function (done) {
 
       request({
-          url: 'https://httpbingo.org/redirect-to?url=http://httpbingo.org/bearer',
+          url: 'https://httpbin.org/redirect-to?url=http://httpbin.org/bearer',
           headers: {
               'Content-Type': 'application/json',
               'cookie': 'ajs_anonymous_id=1234567890',
@@ -75,7 +75,7 @@ describe('Information Leak', function () {
   it('should forward authorization headers when the request has a redirect from the same protocol/domain/port', function (done) {
 
     request({
-      url: 'https://httpbingo.org/redirect-to?url=https://httpbingo.org/bearer',
+      url: 'https://httpbin.org/redirect-to?url=https://httpbin.org/bearer',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',
@@ -93,7 +93,7 @@ describe('Information Leak', function () {
   it('should forward authorization headers when the request hasn\'t any redirect', function (done) {
 
     request({
-      url: 'https://httpbingo.org/bearer?test=hello',
+      url: 'https://httpbin.org/bearer?test=hello',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',
@@ -112,7 +112,7 @@ describe('Information Leak', function () {
   it('should not fail when the request has query parameters in array format', function (done) {
 
     request({
-      url: 'https://httpbingo.org/bearer?test=hello&test=world',
+      url: 'https://httpbin.org/bearer?test=hello&test=world',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',
@@ -131,7 +131,7 @@ describe('Information Leak', function () {
   it('should forward authorization headers regardless if skipHeaderSanitize is set to true', function (done) {
 
     request({
-      url: 'https://httpbingo.org/redirect-to?url=http://httpbingo.org/bearer',
+      url: 'https://httpbin.org/redirect-to?url=http://httpbin.org/bearer',
       headers: {
         'Content-Type': 'application/json',
         'cookie': 'ajs_anonymous_id=1234567890',

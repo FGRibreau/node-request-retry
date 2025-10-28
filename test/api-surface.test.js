@@ -16,30 +16,30 @@ describe('API surface', function () {
   describe('callback api', function(){
     [['request', request], ['request.get', request.get]].forEach(function(pair){
       it('should work with '+pair[0]+'(url, f)', function (done) {
-        pair[1]('http://www.filltext.com/?rows=1', function (err, response, body) {
+        pair[1]('https://httpbin.org/json', function (err, response, body) {
           t.strictEqual(response.statusCode, 200);
-          t.strictEqual(response.body, '[{}]');
+          t.isString(response.body);
           done();
         });
       });
 
       it('should work with '+pair[0]+'(url, object, f)', function (done) {
-        pair[1]('http://www.filltext.com/?rows=1', {
+        pair[1]('https://httpbin.org/json', {
           json:true,
         }, function (err, response, body) {
           t.strictEqual(response.statusCode, 200);
-          t.deepEqual(response.body, [{}]);
+          t.isObject(response.body.slideshow);
           done();
         });
       });
 
       it('should work with '+pair[0]+'(object, f)', function (done) {
         pair[1]({
-          url: 'http://www.filltext.com/?rows=1',
+          url: 'https://httpbin.org/json',
           json:true
         }, function (err, response, body) {
           t.strictEqual(response.statusCode, 200);
-          t.deepEqual(response.body, [{}]);
+          t.isObject(response.body.slideshow);
           done();
         });
       });
@@ -49,33 +49,33 @@ describe('API surface', function () {
   describe('promise api', function(){
     [['request', request], ['request.get', request.get]].forEach(function(pair){
       it('should work with '+pair[0]+'(url)', function (done) {
-        pair[1]('http://www.filltext.com/?rows=1')
+        pair[1]('https://httpbin.org/json')
         .then(function (response) {
           t.strictEqual(response.statusCode, 200);
-          t.strictEqual(response.body, '[{}]');
+          t.isString(response.body);
           done();
         });
       });
 
       it('should work with request(url, object)', function (done) {
-        pair[1]('http://www.filltext.com/?rows=1', {
+        pair[1]('https://httpbin.org/json', {
           json:true,
         })
         .then(function (response) {
           t.strictEqual(response.statusCode, 200);
-          t.deepEqual(response.body, [{}]);
+          t.isObject(response.body.slideshow);
           done();
         });
       });
 
       it('should work with '+pair[0]+'(object)', function (done) {
         pair[1]({
-          url: 'http://www.filltext.com/?rows=1',
+          url: 'https://httpbin.org/json',
           json:true
         })
         .then(function (response) {
           t.strictEqual(response.statusCode, 200);
-          t.deepEqual(response.body, [{}]);
+          t.isObject(response.body.slideshow);
           done();
         });
       });

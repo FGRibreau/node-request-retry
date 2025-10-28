@@ -5,10 +5,12 @@ var t = require('chai').assert;
 
 describe('Auth', function () {
     it('should work with Basic Authentication', function (done) {
+        this.timeout(5000);
         var r = request.defaults({
             json: true
         });
         r('http://httpbin.org/basic-auth/user/passwd', function (err, response, body) {
+            if (err) return done(err);
             t.strictEqual(response.statusCode, 200);
             t.strictEqual(body.authenticated, true);
             t.strictEqual(body.user, 'user');

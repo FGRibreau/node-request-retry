@@ -22,8 +22,9 @@ describe('RetryStrategies', function () {
 
   describe('Custom strategies', function () {
     it('should overwrite `options` object if strategy returned it', function (done) {
+      this.timeout(5000);
       var strategy = function (err, response, body, options) {
-        options.url = 'http://www.filltext.com/?rows=1&err=200'; //overwrite url to return 200
+        options.url = 'https://httpbin.org/status/200'; //overwrite url to return 200
         return {
           mustRetry: true,
           options: options,
@@ -31,12 +32,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
+        url: 'https://httpbin.org/status/500', // returns a 500 status
         maxAttempts: 3,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(200, response.statusCode);
         done();
@@ -44,8 +45,9 @@ describe('RetryStrategies', function () {
     });
 
     it('should not overwrite `options` object if strategy did not returned it', function (done) {
+      this.timeout(5000);
       var strategy = function (err, response, body, options) {
-        options.url = 'http://www.filltext.com/?rows=1&err=200'; //overwrite url to return 200
+        options.url = 'https://httpbin.org/status/200'; //overwrite url to return 200
         //do not return `options`
         return {
           mustRetry: true,
@@ -53,12 +55,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1&err=500', // returns a 500 status
+        url: 'https://httpbin.org/status/500', // returns a 500 status
         maxAttempts: 3,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(500, response.statusCode);
         done();
@@ -66,17 +68,18 @@ describe('RetryStrategies', function () {
     });
 
     it('should allow boolean true return value', function (done) {
+      this.timeout(5000);
       var strategy = function (err, response, body) {
         return true;
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1',
+        url: 'https://httpbin.org/json',
         maxAttempts: 2,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(2, this.attempts); // maxAttempts reached
         done();
@@ -89,12 +92,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1',
+        url: 'https://httpbin.org/json',
         maxAttempts: 2,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(1, this.attempts); // maxAttempts NOT reached
         done();
@@ -102,6 +105,7 @@ describe('RetryStrategies', function () {
     });
 
     it('should allow mustRetry object with true return value', function (done) {
+      this.timeout(5000);
       var strategy = function (err, response, body) {
         return {
           mustRetry: true,
@@ -109,12 +113,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1',
+        url: 'https://httpbin.org/json',
         maxAttempts: 2,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(2, this.attempts); // maxAttempts reached
         done();
@@ -129,12 +133,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1',
+        url: 'https://httpbin.org/json',
         maxAttempts: 2,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
 
         t.strictEqual(1, this.attempts); // maxAttempts NOT reached
         done();
@@ -149,12 +153,12 @@ describe('RetryStrategies', function () {
       };
 
       request({
-        url: 'http://www.filltext.com/?rows=1',
+        url: 'https://httpbin.org/json',
         maxAttempts: 2,
         retryDelay: 100,
         retryStrategy: strategy
       }, function(err, response, body) {
-        if(err) done(err);
+        if(err) return done(err);
         t.strictEqual(1, this.attempts); // maxAttempts NOT reached
         done();
       });
