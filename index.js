@@ -8,7 +8,7 @@
  *
  */
 var extend = require('extend');
-var request = require('request');
+var request = require('postman-request');
 var RetryStrategies = require('./strategies');
 var _ = require('lodash');
 var url = require('url');
