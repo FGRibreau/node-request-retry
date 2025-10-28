@@ -281,6 +281,7 @@
 
 ## 1.8.0 (2016-05-11)
 
+* Add support for .get/.post/... helpers ([0cb9e61](https://github.com/FGRibreau/node-request-retry/commit/0cb9e61))
 * Release v1.8.0. ([6767b49](https://github.com/FGRibreau/node-request-retry/commit/6767b49))
 * docs(changelog): updated ([97d6429](https://github.com/FGRibreau/node-request-retry/commit/97d6429))
 
@@ -288,9 +289,8 @@
 
 ## <small>1.7.1 (2016-05-11)</small>
 
-* Add support for .get/.post/... helpers ([0cb9e61](https://github.com/FGRibreau/node-request-retry/commit/0cb9e61))
 * Release v1.7.1. ([55ab78a](https://github.com/FGRibreau/node-request-retry/commit/55ab78a))
-* defaults(): use extend for "deep" defaulting ([b514a81](https://github.com/FGRibreau/node-request-retry/commit/b514a81)), closes [/github.com/request/request/blob/master/index.js#L90](https://github.com//github.com/request/request/blob/master/index.js/issues/L90)
+* defaults(): use extend for "deep" defaulting ([b514a81](https://github.com/FGRibreau/node-request-retry/commit/b514a81))
 * docs(changelog): updated ([9e29831](https://github.com/FGRibreau/node-request-retry/commit/9e29831))
 * fix(changelog): migrated changelog from ruby to js ([777ca04](https://github.com/FGRibreau/node-request-retry/commit/777ca04))
 
