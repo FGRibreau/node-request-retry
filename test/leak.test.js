@@ -1,5 +1,6 @@
 'use strict';
 
+var http = require('http');
 var request = require('../').defaults({ json: true });;
 var t = require('chai').assert;
 
@@ -144,6 +145,35 @@ describe('Information Leak', function () {
         "token": "eyJhb12345abcdef"
       });
       done();
+    });
+  });
+
+  it('should remove credentials when a runtime redirect changes the port', function (done) {
+    var target = http.createServer(function (req, res) {
+      t.isUndefined(req.headers.cookie);
+      t.isUndefined(req.headers.authorization);
+      res.end('ok');
+      target.close();
+      source.close();
+    });
+    var source = http.createServer(function (req, res) {
+      res.writeHead(302, { Location: 'http://127.0.0.1:' + target.address().port + '/capture' });
+      res.end();
+    });
+
+    target.listen(0, '127.0.0.1', function () {
+      source.listen(0, '127.0.0.1', function () {
+        request({
+          url: 'http://127.0.0.1:' + source.address().port + '/start',
+          headers: {
+            cookie: 'sessionId=abc123',
+            authorization: 'Bearer secret-token'
+          }
+        }, function (err) {
+          if (err) return done(err);
+          done();
+        });
+      });
     });
   });
 

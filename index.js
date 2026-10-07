@@ -59,6 +59,56 @@ function sanitizeHeaders(options) {
   return options;
 }
 
+function sameOrigin(left, right) {
+  const defaultPort = {
+    'http:': '80',
+    'https:': '443'
+  };
+
+  return left.protocol === right.protocol &&
+    left.hostname === right.hostname &&
+    (left.port || defaultPort[left.protocol]) ===
+      (right.port || defaultPort[right.protocol]);
+}
+
+function sanitizeRedirectHeaders(response) {
+  if (!response || !response.headers || !response.headers.location || !this.uri) {
+    return;
+  }
+
+  const currentUrl = url.parse(this.uri.href || this.uri.format());
+  const redirectUrl = url.parse(url.resolve(currentUrl.href, response.headers.location));
+
+  if (sameOrigin(currentUrl, redirectUrl) || !this.headers) {
+    return;
+  }
+
+  ['cookie', 'authorization'].forEach(function (header) {
+    if (_.isFunction(this.removeHeader)) {
+      this.removeHeader(header);
+    } else {
+      Object.keys(this.headers).filter(function (key) {
+        return key.toLowerCase() === header;
+      }).forEach(function (key) {
+        delete this.headers[key];
+      });
+    }
+  }, this);
+}
+
+function wrapRedirectSanitizer(options) {
+  if (options.followRedirect === false && !options.followAllRedirects) {
+    return options;
+  }
+  const originalFollowRedirect = options.followRedirect;
+  options.followRedirect = function (response) {
+    sanitizeRedirectHeaders.call(this, response);
+    return _.isFunction(originalFollowRedirect) ?
+      originalFollowRedirect.call(this, response) : true;
+  };
+  return options;
+}
+
 function _cloneOptions(options) {
   const cloned = {};
   for (let key in options) {
@@ -120,7 +170,8 @@ function Request(url, options, f, retryConfig) {
    * Option object
    * @type {Object}
    */
-  this.options = retryConfig.skipHeaderSanitize ? options : sanitizeHeaders(options)
+  this.options = retryConfig.skipHeaderSanitize ? options :
+    wrapRedirectSanitizer(sanitizeHeaders(options));
 
   /**
    * Return true if the request should be retried
